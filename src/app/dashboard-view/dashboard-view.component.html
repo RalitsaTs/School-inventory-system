@@ -1,0 +1,50 @@
+<igx-navbar class="dashboard-nav-bar">
+  <igx-navbar-action>
+    <button igxIconButton="flat" igxRipple [igxToggleAction]="dashboardNavDrawer">
+      <igx-icon>
+        menu
+      </igx-icon>
+    </button>
+  </igx-navbar-action>
+  <igx-navbar-title class="navbar-content">
+    <h6 class="h6">
+      School Inventory
+    </h6>
+  </igx-navbar-title>
+  <button igxIconButton="flat" igxRipple>
+    <igx-icon>
+      search
+    </igx-icon>
+  </button>
+  <button igxIconButton="flat" igxRipple>
+    <igx-icon>
+      favorite
+    </igx-icon>
+  </button>
+  <button igxIconButton="flat" igxRipple>
+    <igx-icon>
+      more_vert
+    </igx-icon>
+  </button>
+</igx-navbar>
+<div class="row-layout horizontal-group">
+  <igx-nav-drawer [isOpen]="true" [pin]="true" width="320px" #dashboardNavDrawer class="dashboard-nav-drawer">
+    <ng-template igxDrawer>
+      <div igxDrawerItem igxRipple [routerLink]="['/dashboard-view/student-dashboard']">
+        <igx-icon class="icon">
+          account_circle
+        </igx-icon>
+        <span>Student Dashboard</span>
+      </div>
+      <div igxDrawerItem igxRipple [routerLink]="['/dashboard-view/teacher-dashboard']">
+        <igx-icon class="icon">
+          account_circle
+        </igx-icon>
+        <span>Teacher Dashboard</span>
+      </div>
+    </ng-template>
+  </igx-nav-drawer>
+  <div class="page-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

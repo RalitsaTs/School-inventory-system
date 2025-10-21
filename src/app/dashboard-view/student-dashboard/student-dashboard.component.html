@@ -1,0 +1,180 @@
+<div class="column-layout student-dashboard-content">
+  <div class="column-layout student-dashboard-header">
+    <h4 class="content">
+      Dashboard
+    </h4>
+    <p class="content">
+      Welcome, Student!
+    </p>
+  </div>
+  <div class="row-layout student-metrics-section">
+    <igx-card class="student-metric-card1">
+      <igx-card-header>
+        <div igxCardThumbnail>
+          <igx-avatar shape="circle" class="student-metric-card1-avatar">
+            <igx-icon class="icon">
+              shopping_cart
+            </igx-icon>
+          </igx-avatar>
+        </div>
+        <h3 igxCardHeaderTitle>
+          Checked Out Items
+        </h3>
+        <h5 igxCardHeaderSubtitle>
+      </h5>
+      </igx-card-header>
+      <igx-card-content class="body-content">
+        <div class="column-layout student-metric-card1-content">
+          <h3 class="student-metric-card1-value">
+            15
+          </h3>
+          <div class="row-layout student-metric-card1-growth">
+            <p class="ig-typography__subtitle-2 student-metric-card1-growth-rate">
+              +5%
+            </p>
+            <p class="ig-typography__body-2 content">
+              vs. last month
+            </p>
+          </div>
+        </div>
+      </igx-card-content>
+    </igx-card>
+    <igx-card class="student-metric-card1">
+      <igx-card-header>
+        <div igxCardThumbnail>
+          <igx-avatar shape="circle" class="student-metric-card2-avatar">
+            <igx-icon class="icon">
+              warning
+            </igx-icon>
+          </igx-avatar>
+        </div>
+        <h3 igxCardHeaderTitle>
+          Overdue Items
+        </h3>
+        <h5 igxCardHeaderSubtitle>
+      </h5>
+      </igx-card-header>
+      <igx-card-content class="body-content">
+        <div class="column-layout student-metric-card1-content">
+          <h3 class="student-metric-card1-value">
+            3
+          </h3>
+          <div class="row-layout student-metric-card1-growth">
+            <p class="ig-typography__subtitle-2 student-metric-card2-growth-rate">
+              +10%
+            </p>
+            <p class="ig-typography__body-2 content">
+              vs. last month
+            </p>
+          </div>
+        </div>
+      </igx-card-content>
+    </igx-card>
+    <igx-card class="student-metric-card1">
+      <igx-card-header>
+        <div igxCardThumbnail>
+          <igx-avatar shape="circle" class="student-metric-card3-avatar">
+            <igx-icon class="icon">
+              event
+            </igx-icon>
+          </igx-avatar>
+        </div>
+        <h3 igxCardHeaderTitle>
+          Upcoming Returns
+        </h3>
+        <h5 igxCardHeaderSubtitle>
+      </h5>
+      </igx-card-header>
+      <igx-card-content class="body-content">
+        <div class="column-layout student-metric-card1-content">
+          <h3 class="student-metric-card1-value">
+            7
+          </h3>
+          <div class="row-layout student-metric-card1-growth">
+            <p class="ig-typography__subtitle-2 student-metric-card1-growth-rate">
+              -2%
+            </p>
+            <p class="ig-typography__body-2 content">
+              vs. last month
+            </p>
+          </div>
+        </div>
+      </igx-card-content>
+    </igx-card>
+    <igx-card class="student-metric-card1">
+      <igx-card-header>
+        <div igxCardThumbnail>
+          <igx-avatar shape="circle" class="student-metric-card4-avatar">
+            <igx-icon class="icon">
+              check_circle
+            </igx-icon>
+          </igx-avatar>
+        </div>
+        <h3 igxCardHeaderTitle>
+          Available Items
+        </h3>
+        <h5 igxCardHeaderSubtitle>
+      </h5>
+      </igx-card-header>
+      <igx-card-content class="body-content">
+        <div class="column-layout student-metric-card1-content">
+          <h3 class="student-metric-card1-value">
+            120
+          </h3>
+          <div class="row-layout student-metric-card1-growth">
+            <p class="ig-typography__subtitle-2 student-metric-card1-growth-rate">
+              +8%
+            </p>
+            <p class="ig-typography__body-2 content">
+              vs. last month
+            </p>
+          </div>
+        </div>
+      </igx-card-content>
+    </igx-card>
+  </div>
+  <div class="row-layout student-statistics-section">
+    <div class="column-layout student-stats-charts-column">
+      <div class="row-layout student-charts-row">
+        <div class="column-layout inventory-categories-section">
+          <div class="column-layout student-dashboard-header">
+            <h5 class="content">
+              Inventory Categories
+            </h5>
+            <p class="ig-typography__body-2 content">
+              Distribution of items by category.
+            </p>
+          </div>
+          <igx-category-chart computedPlotAreaMarginMode="series" class="inventory-categories-chart"></igx-category-chart>
+        </div>
+        <div class="column-layout inventory-categories-section">
+          <div class="column-layout student-dashboard-header">
+            <h5 class="content">
+              Usage Trends
+            </h5>
+            <p class="ig-typography__body-2 content">
+              Item borrowing and return activity over time.
+            </p>
+          </div>
+          <igx-category-chart computedPlotAreaMarginMode="series" class="inventory-categories-chart"></igx-category-chart>
+        </div>
+      </div>
+      <div class="column-layout my-borrowed-items-section">
+        <div class="column-layout student-dashboard-header">
+          <h5 class="content">
+            My Borrowed Items
+          </h5>
+          <p class="ig-typography__body-2 content">
+            List of items currently borrowed by the student.
+          </p>
+        </div>
+        <igx-grid [data]="studentBorrowedItemsListBorrowedItems" [allowFiltering]="true" filterMode="excelStyleFilter" class="my-borrowed-items-grid">
+          <igx-column field="item_name" header="Item Name" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+          <igx-column field="borrow_date" header="Borrow Date" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+          <igx-column field="return_date" header="Return Date" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+          <igx-column field="status" header="Status" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+        </igx-grid>
+      </div>
+    </div>
+  </div>
+</div>

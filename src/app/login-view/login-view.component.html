@@ -1,0 +1,42 @@
+<div class="row-layout login-form-row-layout">
+  <div class="column-layout login-form-column-layout">
+    <h4 class="content">
+      Login
+    </h4>
+    <div class="column-layout login-inputs-column-layout">
+      <igx-input-group type="border" class="email-input">
+        <input type="email" [(ngModel)]="value" required="true" igxInput #igxInput />
+        <label igxLabel>Email address</label>
+        @if (igxInput.validity.valueMissing) {
+          <igx-hint>This field is required</igx-hint>
+        }
+      </igx-input-group>
+      <igx-input-group type="border" class="email-input">
+        <input type="password" [(ngModel)]="value1" required="true" igxInput #igxInput1 />
+        <label igxLabel>Password</label>
+        @if (igxInput1.validity.valueMissing) {
+          <igx-hint>This field is required</igx-hint>
+        }
+      </igx-input-group>
+      <div class="row-layout remember-me-row-layout">
+        <igx-checkbox labelPosition="after" class="remember-me-checkbox">
+          Remember me
+        </igx-checkbox>
+        <a target="_blank" class="ig-typography__body-2 forgot-password-link">
+          Forgot your password?
+        </a>
+      </div>
+      <button igxButton="contained" type="button" igxRipple class="sign-in-button">
+        Sign in
+      </button>
+    </div>
+    <div class="row-layout create-account-row-layout">
+      <p class="ig-typography__body-2 content">
+        Don't have an account?
+      </p>
+      <a target="_blank" class="ig-typography__body-2 forgot-password-link">
+        Create new account
+      </a>
+    </div>
+  </div>
+</div>

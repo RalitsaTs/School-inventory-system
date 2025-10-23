@@ -1,27 +1,27 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IGX_CARD_DIRECTIVES, IgxAvatarComponent, IgxButtonDirective, IgxIconComponent, IgxRippleDirective } from 'igniteui-angular';
+import { IGX_GRID_DIRECTIVES, IgxButtonDirective, IgxRippleDirective } from 'igniteui-angular';
 import { Subject, takeUntil } from 'rxjs';
-import { EquipmentRequestsType } from '../../models/generate-alist-of-equipment-requests-including-it/equipment-requests-type';
-import { GenerateAListOfEquipmentRequestsIncludingItService } from '../../services/generate-alist-of-equipment-requests-including-it.service';
+import { EmployeesType } from '../../models/northwind/employees-type';
+import { NorthwindService } from '../../services/northwind.service';
 
 @Component({
   selector: 'app-equipment-requests-view',
-  imports: [IGX_CARD_DIRECTIVES, IgxAvatarComponent, IgxIconComponent, IgxButtonDirective, IgxRippleDirective],
+  imports: [IGX_GRID_DIRECTIVES, IgxButtonDirective, IgxRippleDirective],
   templateUrl: './equipment-requests-view.component.html',
   styleUrls: ['./equipment-requests-view.component.scss']
 })
 export class EquipmentRequestsViewComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
-  public generateAListOfEquipmentRequestsIncludingItEquipmentRequests: EquipmentRequestsType[] = [];
+  public northwindEmployees: EmployeesType[] = [];
 
   constructor(
-    public generateAListOfEquipmentRequestsIncludingItService: GenerateAListOfEquipmentRequestsIncludingItService,
+    public northwindService: NorthwindService,
   ) {}
 
 
   ngOnInit() {
-    this.generateAListOfEquipmentRequestsIncludingItService.getEquipmentRequests().pipe(takeUntil(this.destroy$)).subscribe(
-      data => this.generateAListOfEquipmentRequestsIncludingItEquipmentRequests = data
+    this.northwindService.getEmployees().pipe(takeUntil(this.destroy$)).subscribe(
+      data => this.northwindEmployees = data
     );
   }
 

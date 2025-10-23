@@ -34,19 +34,6 @@
   max-height: unset;
   flex-shrink: 0;
 }
-.request-card {
-  height: max-content;
-  min-width: 320px;
-}
-.request-card-content {
-  justify-content: flex-start;
-  align-items: stretch;
-  align-content: flex-start;
-  gap: 8px;
-  position: relative;
-  min-width: 50px;
-  min-height: 50px;
-}
 .row-layout {
   display: flex;
 }
@@ -64,13 +51,12 @@
   height: max-content;
   min-width: min-content;
 }
-.body-content {
-  min-width: 50px;
-  min-height: 50px;
-}
-.actions-content {
-  min-width: 50px;
-  min-height: 40px;
+.grid {
+  --ig-size: var(--ig-size-medium);
+  min-width: 600px;
+  min-height: 300px;
+  flex-grow: 1;
+  flex-basis: 0;
 }
 .approve-button {
   --ig-size: var(--ig-size-medium);

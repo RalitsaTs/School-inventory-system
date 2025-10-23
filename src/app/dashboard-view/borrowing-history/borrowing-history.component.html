@@ -1,0 +1,34 @@
+<div class="column-layout request-equipment-layout">
+  <h4 class="request-equipment-title">
+    My borrowing history
+  </h4>
+  <igx-select type="box" required="true" class="equipment-dropdown">
+    <label igxLabel>Select Equipment</label>
+  </igx-select>
+  <div class="row-layout request-buttons-row">
+    <button igxButton="contained" type="button" igxRipple class="submit-request-button">
+      Submit Request
+    </button>
+    <button igxButton="outlined" type="button" igxRipple class="submit-request-button">
+      Cancel
+    </button>
+  </div>
+  <igx-grid [data]="northwindEmployees" primaryKey="employeeID" [allowFiltering]="true" filterMode="excelStyleFilter" width="1011px" class="grid">
+    <igx-column field="employeeID" dataType="number" header="employeeID" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="lastName" dataType="string" header="lastName" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="firstName" dataType="string" header="firstName" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="title" dataType="string" header="title" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="titleOfCourtesy" dataType="string" header="titleOfCourtesy" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="birthDate" dataType="date" header="birthDate" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="hireDate" dataType="date" header="hireDate" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="address.street" dataType="string" header="address street" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="address.city" dataType="string" header="address city" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="address.region" dataType="string" header="address region" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="address.postalCode" dataType="string" header="address postalCode" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="address.country" dataType="string" header="address country" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="address.phone" dataType="string" header="address phone" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="managerID" dataType="number" header="managerID" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="notes" dataType="string" header="notes" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+    <igx-column field="avatarUrl" dataType="string" header="avatarUrl" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+  </igx-grid>
+</div>

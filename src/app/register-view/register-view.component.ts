@@ -3,12 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { IGX_INPUT_GROUP_DIRECTIVES, IgxButtonDirective, IgxRippleDirective } from 'igniteui-angular';
 
 @Component({
-  selector: 'app-login-view',
+  selector: 'app-register-view',
   imports: [IGX_INPUT_GROUP_DIRECTIVES, IgxButtonDirective, IgxRippleDirective, FormsModule],
-  templateUrl: './login-view.component.html',
-  styleUrls: ['./login-view.component.scss']
+  templateUrl: './register-view.component.html',
+  styleUrls: ['./register-view.component.scss']
 })
-export class LoginViewComponent {
+export class RegisterViewComponent {
   public value?: string;
   public value1?: string;
 }

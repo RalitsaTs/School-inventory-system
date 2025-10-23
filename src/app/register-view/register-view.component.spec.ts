@@ -3,19 +3,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { IGX_INPUT_GROUP_DIRECTIVES, IgxButtonDirective, IgxRippleDirective } from 'igniteui-angular';
-import { LoginViewComponent } from './login-view.component';
+import { RegisterViewComponent } from './register-view.component';
 
-describe('LoginViewComponent', () => {
-  let component: LoginViewComponent;
-  let fixture: ComponentFixture<LoginViewComponent>;
+describe('RegisterViewComponent', () => {
+  let component: RegisterViewComponent;
+  let fixture: ComponentFixture<RegisterViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LoginViewComponent, NoopAnimationsModule, FormsModule, ReactiveFormsModule, IGX_INPUT_GROUP_DIRECTIVES, IgxButtonDirective, IgxRippleDirective]
+      imports: [RegisterViewComponent, NoopAnimationsModule, FormsModule, ReactiveFormsModule, IGX_INPUT_GROUP_DIRECTIVES, IgxButtonDirective, IgxRippleDirective]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LoginViewComponent);
+    fixture = TestBed.createComponent(RegisterViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

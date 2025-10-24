@@ -1,0 +1,62 @@
+<igx-navbar class="dashboard-nav-bar">
+  <igx-navbar-action>
+    <button igxIconButton="flat" igxRipple [igxToggleAction]="dashboardNavDrawer">
+      <igx-icon>
+        menu
+      </igx-icon>
+    </button>
+  </igx-navbar-action>
+  <igx-navbar-title class="navbar-content">
+    <h6 class="h6">
+      School Inventory
+    </h6>
+  </igx-navbar-title>
+  <button igxIconButton="flat" igxRipple [routerLink]="['/register-view']">
+    <igx-icon>
+      app_registration
+    </igx-icon>
+  </button>
+  <button igxIconButton="flat" igxRipple>
+    <igx-icon>
+      logout
+    </igx-icon>
+  </button>
+  <button igxIconButton="flat" igxRipple [routerLink]="['/login-view']">
+    <igx-icon>
+      account_circle
+    </igx-icon>
+  </button>
+</igx-navbar>
+<div class="row-layout horizontal-group">
+  <igx-nav-drawer [isOpen]="true" [pin]="true" width="320px" #dashboardNavDrawer class="dashboard-nav-drawer">
+    <ng-template igxDrawer>
+      <div igxDrawerItem igxRipple>
+        <igx-icon class="icon">
+          account_circle
+        </igx-icon>
+        <span>Student Dashboard</span>
+      </div>
+      <div igxDrawerItem igxRipple [routerLink]="['/equipment-management-view/equipments-read-only']">
+        <igx-icon class="icon">
+          account_circle
+        </igx-icon>
+        <span>Teacher Dashboard</span>
+      </div>
+      <div igxDrawerItem igxRipple>
+        <igx-icon class="icon">
+          add_shopping_cart
+        </igx-icon>
+        <span>Request Equipment</span>
+      </div>
+      <div igxDrawerItem igxRipple>
+        <igx-icon class="icon">
+          inventory
+        </igx-icon>
+        <span>Equipment Requests</span>
+      </div>
+    </ng-template>
+  </igx-nav-drawer>
+  <div class="page-container">
+    <router-outlet></router-outlet>
+  </div>
+</div>

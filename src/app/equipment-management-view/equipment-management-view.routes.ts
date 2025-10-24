@@ -8,7 +8,7 @@ import { DRAFTEquipments1Component } from './draft-equipments-1/draft-equipments
 export const routes: Routes = [
   { path: '', component: EquipmentManagementViewComponent, children: [
       { path: '', redirectTo: 'equipments-read-only', pathMatch: 'full' },
-      { path: 'equipments--read-only-', loadChildren: () => import('./equipments-read-only/equipments-read-only.routes').then(m => m.routes), data: { text: 'Equipments-Read-Only' } },
+      { path: 'equipments-read-only', loadChildren: () => import('./equipments-read-only/equipments-read-only.routes').then(m => m.routes), data: { text: 'Equipments-Read-Only' } },
       { path: 'equipments-admin-view', component: EquipmentsAdminViewComponent, data: { text: 'Equipments-Admin-View' } },
       { path: 'equipment-requests-and-condition-update-view', component: EquipmentRequestsAndConditionUpdateViewComponent, data: { text: 'Equipment-Requests-And-Condition-Update-View' } },
       { path: 'draft-equipments-1', component: DRAFTEquipments1Component, data: { text: 'Draft-Equipments-1' } },

@@ -1,0 +1,61 @@
+:host {
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+}
+.column-layout {
+  display: flex;
+  flex-direction: column;
+}
+.request-equipment-layout {
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  gap: 24px;
+  position: relative;
+  padding: 24px;
+  min-width: 50px;
+  min-height: 50px;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+.row-layout {
+  display: flex;
+}
+.request-buttons-row {
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  gap: 8px 16px;
+  position: relative;
+  min-width: 50px;
+  min-height: 50px;
+  flex-shrink: 0;
+}
+.request-equipment-title {
+  text-align: center;
+  height: max-content;
+  min-width: min-content;
+}
+.start-date-prefix-icon {
+  --size: 24px;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+.equipment-dropdown {
+  --ig-size: var(--ig-size-medium);
+  height: max-content;
+  min-width: min-content;
+}
+.user-input {
+  height: max-content;
+  min-width: min-content;
+}
+.submit-request-button {
+  --ig-size: var(--ig-size-medium);
+  height: max-content;
+  flex-shrink: 0;
+}

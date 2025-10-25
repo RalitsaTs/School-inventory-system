@@ -1,0 +1,96 @@
+:host {
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  gap: 0;
+}
+.column-layout {
+  display: flex;
+  flex-direction: column;
+}
+.teacher-dashboard-content {
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  gap: 24px;
+  overflow: auto;
+  position: relative;
+  padding: 24px;
+  min-width: 50px;
+  min-height: 50px;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+.teacher-dashboard-header {
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  gap: 8px;
+  position: relative;
+  min-width: unset;
+  max-height: unset;
+  flex-shrink: 0;
+}
+.row-layout {
+  display: flex;
+}
+.teacher-metrics-section {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  gap: 16px;
+  position: relative;
+  min-width: 50px;
+  flex-shrink: 0;
+}
+.teacher-statistics-section {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+  gap: 24px;
+  position: relative;
+  min-width: 50px;
+  min-height: 50px;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+.teacher-stats-charts-column {
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  gap: 24px;
+  position: relative;
+  min-width: unset;
+  max-height: unset;
+  flex: 3 0 0;
+}
+.all-items-inventory-section {
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  gap: 24px;
+  position: relative;
+  min-width: 360px;
+  min-height: 50px;
+  flex-grow: 2;
+  flex-shrink: 0;
+}
+.content {
+  height: max-content;
+  min-width: min-content;
+}
+.all-items-inventory-grid {
+  --ig-size: var(--ig-size-medium);
+  min-width: 200px;
+  max-height: 400px;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+.button {
+  --ig-size: var(--ig-size-medium);
+  height: max-content;
+}

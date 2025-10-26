@@ -7,6 +7,7 @@ import { MyRequestsComponent } from './my-requests/my-requests.component';
 import { BorrowingHistoryComponent } from './borrowing-history/borrowing-history.component';
 import { EquipmentRequestsViewComponent } from './equipment-requests-view/equipment-requests-view.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { MyProfileViewAndHistoryComponent } from '../my-profile-view-and-history/my-profile-view-and-history.component';
 import { authGuard, adminGuard, userOrAdminGuard } from '../guards/auth.guard';
 
 export const routes: Routes = [
@@ -47,6 +48,11 @@ export const routes: Routes = [
         component: AdminPanelComponent, 
         canActivate: [adminGuard],
         data: { text: 'Admin-Panel' } 
+      },
+      { 
+        path: 'my-profile', 
+        component: MyProfileViewAndHistoryComponent, 
+        data: { text: 'My-Profile' } 
       },
     ]
   },

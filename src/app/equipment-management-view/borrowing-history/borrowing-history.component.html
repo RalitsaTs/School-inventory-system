@@ -17,7 +17,7 @@
     
     <igx-column field="id" header="ID" [sortable]="true" [filterable]="true" width="80px"></igx-column>
     
-    <igx-column field="action" header="Action" [sortable]="true" [filterable]="true" width="150px">
+    <igx-column field="action" header="Action" [sortable]="true" [filterable]="true" width="250px">
       <ng-template igxCell let-cell="cell">
         <span [class]="getActionClass(cell.value)" class="action-badge">
           {{ cell.value }}
@@ -25,17 +25,17 @@
       </ng-template>
     </igx-column>
     
-    <igx-column field="equipmentName" header="Equipment" [sortable]="true" [filterable]="true" width="200px"></igx-column>
+    <igx-column field="equipmentId" header="Equipment ID" [sortable]="true" [filterable]="true" width="200px"></igx-column>
     
-    <igx-column field="userName" header="User" [sortable]="true" [filterable]="true" width="150px"></igx-column>
+    <igx-column field="userId" header="User " [sortable]="true" [filterable]="true" width="150px"></igx-column>
     
-    <igx-column field="timestamp" header="Date & Time" [sortable]="true" [filterable]="true" width="150px">
+    <igx-column field="timestamp" header="Date & Time" [sortable]="true" [filterable]="true" width="250px">
       <ng-template igxCell let-cell="cell">
         {{ formatDate(cell.value) }}
       </ng-template>
     </igx-column>
     
-    <igx-column field="details" header="Details" [sortable]="false" [filterable]="true" width="250px">
+    <igx-column field="notes" header="Details" [sortable]="false" [filterable]="true">
       <ng-template igxCell let-cell="cell">
         <span [title]="cell.value">{{ cell.value || '-' }}</span>
       </ng-template>

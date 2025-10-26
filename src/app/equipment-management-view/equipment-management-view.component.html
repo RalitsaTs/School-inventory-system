@@ -12,19 +12,19 @@
     </h6>
   </igx-navbar-title>
   
-  @if (currentUser) {
+  @if (isAuthLoaded && currentUser) {
     <span class="user-welcome">Welcome, {{ currentUser.email }}</span>
   }
   
-  @if (authService.isAdmin()) {
-    <button igxIconButton="flat" igxRipple [routerLink]="['/admin-view']" title="Admin Panel">
+  @if (isAuthLoaded && authService.isAdmin()) {
+    <button igxIconButton="flat" igxRipple [routerLink]="['admin-panel']" title="Admin Panel">
       <igx-icon>
         admin_panel_settings
       </igx-icon>
     </button>
   }
   
-  <button igxIconButton="flat" igxRipple [routerLink]="['/my-profile-view-and-history']" title="My Profile">
+  <button igxIconButton="flat" igxRipple [routerLink]="['my-profile']" title="My Profile">
     <igx-icon>
       account_circle
     </igx-icon>
@@ -40,11 +40,28 @@
 <div class="row-layout horizontal-group">
   <igx-nav-drawer [isOpen]="true" [pin]="true" width="320px" #dashboardNavDrawer class="dashboard-nav-drawer">
     <ng-template igxDrawer>
-      <div igxDrawerItem igxRipple [routerLink]="['equipments-read-only']" routerLinkActive="active-nav-item">
+      
+      @if (isAuthLoaded && authService.isAdmin()) {
+        <div igxDrawerItem igxRipple [routerLink]="['admin-panel']" routerLinkActive="active-nav-item">
+          <igx-icon class="icon">
+            admin_panel_settings
+          </igx-icon>
+          <span>Admin Panel</span>
+        </div>
+        
+        <div igxDrawerItem igxRipple [routerLink]="['equipment-requests-view']" routerLinkActive="active-nav-item">
+          <igx-icon class="icon">
+            pending_actions
+          </igx-icon>
+          <span>Manage Requests</span>
+        </div>
+      }
+
+      <div igxDrawerItem igxRipple [routerLink]="['equipment-list']" routerLinkActive="active-nav-item">
         <igx-icon class="icon">
           inventory
         </igx-icon>
-        <span>Equipment List</span>
+        <span>Equipment Inventory</span>
       </div>
       
       <div igxDrawerItem igxRipple [routerLink]="['request-equipment']" routerLinkActive="active-nav-item">
@@ -61,30 +78,13 @@
         <span>My Requests</span>
       </div>
       
-      @if (authService.isAdmin() || authService.isTeacher()) {
-        <div igxDrawerItem igxRipple [routerLink]="['equipment-requests-and-condition-update-view']" routerLinkActive="active-nav-item">
-          <igx-icon class="icon">
-            pending_actions
-          </igx-icon>
-          <span>Manage Requests</span>
-        </div>
-      }
+      <div igxDrawerItem igxRipple [routerLink]="['borrowing-history']" routerLinkActive="active-nav-item">
+        <igx-icon class="icon">
+          history
+        </igx-icon>
+        <span>Borrowing History</span>
+      </div>
       
-      @if (authService.isAdmin()) {
-        <div igxDrawerItem igxRipple [routerLink]="['equipments-admin-view']" routerLinkActive="active-nav-item">
-          <igx-icon class="icon">
-            settings
-          </igx-icon>
-          <span>Manage Equipment</span>
-        </div>
-        
-        <div igxDrawerItem igxRipple [routerLink]="['reports']" routerLinkActive="active-nav-item">
-          <igx-icon class="icon">
-            analytics
-          </igx-icon>
-          <span>Reports</span>
-        </div>
-      }
     </ng-template>
   </igx-nav-drawer>
   

@@ -1,0 +1,44 @@
+<div class="borrowing-history-container">
+  <div class="header-section">
+    <h2>Activity History</h2>
+    <p>Recent equipment activity and borrowing history.</p>
+    @if (isLoading) {
+      <div class="loading-indicator">Loading...</div>
+    }
+  </div>
+
+  <igx-grid 
+    [data]="activityHistory" 
+    [allowFiltering]="true"
+    filterMode="excelStyleFilter"
+    height="600px"
+    width="100%"
+    class="activity-grid">
+    
+    <igx-column field="id" header="ID" [sortable]="true" [filterable]="true" width="80px"></igx-column>
+    
+    <igx-column field="action" header="Action" [sortable]="true" [filterable]="true" width="250px">
+      <ng-template igxCell let-cell="cell">
+        <span [class]="getActionClass(cell.value)" class="action-badge">
+          {{ cell.value }}
+        </span>
+      </ng-template>
+    </igx-column>
+    
+    <igx-column field="equipmentId" header="Equipment ID" [sortable]="true" [filterable]="true" width="200px"></igx-column>
+    
+    <igx-column field="userId" header="User " [sortable]="true" [filterable]="true" width="150px"></igx-column>
+    
+    <igx-column field="timestamp" header="Date & Time" [sortable]="true" [filterable]="true" width="250px">
+      <ng-template igxCell let-cell="cell">
+        {{ formatDate(cell.value) }}
+      </ng-template>
+    </igx-column>
+    
+    <igx-column field="notes" header="Details" [sortable]="false" [filterable]="true">
+      <ng-template igxCell let-cell="cell">
+        <span [title]="cell.value">{{ cell.value || '-' }}</span>
+      </ng-template>
+    </igx-column>
+  </igx-grid>
+</div>

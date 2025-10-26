@@ -1,0 +1,78 @@
+<div class="equipment-requests-container">
+  <div class="header-section">
+    <h2>Equipment Requests Management</h2>
+    <p>Review and manage all equipment requests in the system.</p>
+  </div>
+  
+  <igx-grid 
+    [data]="allRequests" 
+    [allowFiltering]="true"
+    height="600px"
+    width="100%">
+    
+    <igx-column field="id" header="ID" [sortable]="true" [filterable]="true" width="80px"></igx-column>
+    
+    <igx-column field="equipment.name" header="Equipment" [sortable]="true" [filterable]="true" width="200px">
+      <ng-template igxCell let-cell="cell">
+        {{ cell.row.data.equipment?.name || 'N/A' }}
+      </ng-template>
+    </igx-column>
+    
+    <igx-column field="requestedAt" header="Requested" [sortable]="true" [filterable]="true" width="120px">
+      <ng-template igxCell let-cell="cell">
+        {{ formatDate(cell.value) }}
+      </ng-template>
+    </igx-column>
+    
+    <igx-column field="start" header="Start" [sortable]="true" [filterable]="true" width="120px">
+      <ng-template igxCell let-cell="cell">
+        {{ formatDate(cell.value) }}
+      </ng-template>
+    </igx-column>
+    
+    <igx-column field="end" header="End" [sortable]="true" [filterable]="true" width="120px">
+      <ng-template igxCell let-cell="cell">
+        {{ formatDate(cell.value) }}
+      </ng-template>
+    </igx-column>
+    
+    <igx-column field="status" header="Status" [sortable]="true" [filterable]="true" width="120px">
+      <ng-template igxCell let-cell="cell">
+        <span [class]="getStatusClass(cell.value)" class="status-badge">
+          {{ cell.value }}
+        </span>
+      </ng-template>
+    </igx-column>
+    
+    <igx-column header="Actions" [sortable]="false" [filterable]="false" width="180px">
+      <ng-template igxCell let-cell="cell">
+        @if (cell.row.data.status === 'Pending') {
+          <div class="action-buttons">
+            <button 
+              igxButton="contained" 
+              igxRipple 
+              (click)="approveRequest(cell.row.data)"
+              class="approve-btn"
+              title="Approve Request">
+              <igx-icon>check</igx-icon>
+              <span>Approve</span>
+            </button>
+            <button 
+              igxButton="contained" 
+              igxRipple 
+              (click)="rejectRequest(cell.row.data)"
+              class="reject-btn"
+              title="Reject Request">
+              <igx-icon>close</igx-icon>
+              <span>Reject</span>
+            </button>
+          </div>
+        } @else {
+          <span class="action-status">{{ cell.row.data.status }}</span>
+        }
+      </ng-template>
+    </igx-column>
+  </igx-grid>
+
+  <igx-snackbar #snackbar></igx-snackbar>
+</div>

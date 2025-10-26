@@ -1,0 +1,29 @@
+.equipment-request-container {
+  padding: 24px;
+  height: 100%;
+}
+
+.header-section {
+  margin-bottom: 24px;
+}
+
+.header-section h2 {
+  margin: 0 0 8px 0;
+  color: var(--igx-primary-600);
+}
+
+.search-section {
+  margin-bottom: 16px;
+  max-width: 400px;
+}
+
+.dialog-content {
+  min-width: 400px;
+}
+
+.date-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 16px 0;
+}

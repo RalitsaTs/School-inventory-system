@@ -1,11 +1,14 @@
 import { Routes } from '@angular/router';
 
 import { EquipmentManagementViewComponent } from './equipment-management-view.component';
-import { EquipmentsAdminViewComponent } from './equipments-admin-view/equipments-admin-view.component';
-import { EquipmentRequestsAndConditionUpdateViewComponent } from './equipment-requests-and-condition-update-view/equipment-requests-and-condition-update-view.component';
+import { EquipmentListComponent } from './equipment-list/equipment-list.component';
 import { RequestEquipmentComponent } from './request-equipment/request-equipment.component';
 import { MyRequestsComponent } from './my-requests/my-requests.component';
-import { authGuard, adminGuard, teacherOrAdminGuard } from '../guards/auth.guard';
+import { BorrowingHistoryComponent } from './borrowing-history/borrowing-history.component';
+import { EquipmentRequestsViewComponent } from './equipment-requests-view/equipment-requests-view.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { MyProfileViewAndHistoryComponent } from '../my-profile-view-and-history/my-profile-view-and-history.component';
+import { authGuard, adminGuard, userOrAdminGuard } from '../guards/auth.guard';
 
 export const routes: Routes = [
   { 
@@ -13,11 +16,11 @@ export const routes: Routes = [
     component: EquipmentManagementViewComponent, 
     canActivate: [authGuard],
     children: [
-      { path: '', redirectTo: 'equipments-read-only', pathMatch: 'full' },
+      { path: '', redirectTo: 'equipment-list', pathMatch: 'full' },
       { 
-        path: 'equipments-read-only', 
-        loadChildren: () => import('./equipments-read-only/equipments-read-only.routes').then(m => m.routes), 
-        data: { text: 'Equipments-Read-Only' } 
+        path: 'equipment-list', 
+        component: EquipmentListComponent, 
+        data: { text: 'Equipment-List' } 
       },
       { 
         path: 'request-equipment', 
@@ -30,16 +33,26 @@ export const routes: Routes = [
         data: { text: 'My-Requests' } 
       },
       { 
-        path: 'equipments-admin-view', 
-        component: EquipmentsAdminViewComponent, 
-        canActivate: [adminGuard],
-        data: { text: 'Equipments-Admin-View' } 
+        path: 'borrowing-history', 
+        component: BorrowingHistoryComponent, 
+        data: { text: 'Borrowing-History' } 
       },
       { 
-        path: 'equipment-requests-and-condition-update-view', 
-        component: EquipmentRequestsAndConditionUpdateViewComponent, 
-        canActivate: [teacherOrAdminGuard],
-        data: { text: 'Equipment-Requests-And-Condition-Update-View' } 
+        path: 'equipment-requests-view', 
+        component: EquipmentRequestsViewComponent, 
+        canActivate: [userOrAdminGuard],
+        data: { text: 'Equipment-Requests-View' } 
+      },
+      { 
+        path: 'admin-panel', 
+        component: AdminPanelComponent, 
+        canActivate: [adminGuard],
+        data: { text: 'Admin-Panel' } 
+      },
+      { 
+        path: 'my-profile', 
+        component: MyProfileViewAndHistoryComponent, 
+        data: { text: 'My-Profile' } 
       },
     ]
   },

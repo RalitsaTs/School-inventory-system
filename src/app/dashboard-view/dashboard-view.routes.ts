@@ -9,9 +9,9 @@ import { EquipmentRequestsViewComponent } from './equipment-requests-view/equipm
 
 export const routes: Routes = [
   { path: '', component: DashboardViewComponent, children: [
-      { path: '', redirectTo: 'student-dashboard', pathMatch: 'full' },
-      { path: 'student-dashboard', component: StudentDashboardComponent, data: { text: 'Student-Dashboard' } },
-      { path: 'teacher-dashboard', component: TeacherDashboardComponent, data: { text: 'Teacher-Dashboard' } },
+      { path: '', redirectTo: 'user-dashboard', pathMatch: 'full' },
+      { path: 'user-dashboard', component: StudentDashboardComponent, data: { text: 'User-Dashboard' } },
+      { path: 'admin-dashboard', component: TeacherDashboardComponent, data: { text: 'Admin-Dashboard' } },
       { path: 'request-equipment', component: RequestEquipmentComponent, data: { text: 'Request-Equipment' } },
       { path: 'borrowing-history', component: BorrowingHistoryComponent, data: { text: 'Borrowing-History' } },
       { path: 'equipment-requests-view', component: EquipmentRequestsViewComponent, data: { text: 'Equipment-Requests-View' } },

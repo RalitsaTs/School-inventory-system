@@ -4,5 +4,5 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StateService {
-  public userRole: string = 'student';
+  public userRole: string = 'user';
 }

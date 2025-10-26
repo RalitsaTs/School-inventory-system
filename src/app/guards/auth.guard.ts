@@ -26,11 +26,11 @@ export const adminGuard = () => {
   return false;
 };
 
-export const teacherOrAdminGuard = () => {
+export const userOrAdminGuard = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (authService.isAuthenticated() && (authService.isTeacher() || authService.isAdmin())) {
+  if (authService.isAuthenticated() && (authService.isUser() || authService.isAdmin())) {
     return true;
   }
 

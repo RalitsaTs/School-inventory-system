@@ -75,3 +75,94 @@
   flex-grow: 1;
   flex-basis: 0;
 }
+
+/* Admin role assignment styles */
+.role-assignment-section {
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  gap: 24px;
+  position: relative;
+  min-width: 50px;
+  min-height: 50px;
+  flex-grow: 1;
+}
+
+.role-assignment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.form-input {
+  flex: 1;
+  min-width: 200px;
+  height: max-content;
+}
+
+.form-select {
+  flex: 0 0 150px;
+  height: max-content;
+}
+
+.assign-button {
+  flex: 0 0 auto;
+  height: fit-content;
+}
+
+.assignment-message {
+  padding: 12px;
+  border-radius: 4px;
+  margin: 8px 0;
+  font-weight: 500;
+}
+
+.assignment-message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.assignment-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.users-list-section {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.users-list-section h5 {
+  margin: 0;
+  color: var(--ig-gray-800);
+}
+
+.users-grid {
+  --ig-size: var(--ig-size-medium);
+  min-width: 600px;
+  min-height: 200px;
+  flex-grow: 1;
+}
+
+.borrowing-history-section {
+  justify-content: flex-start;
+  align-items: center;
+  align-content: flex-start;
+  gap: 24px;
+  position: relative;
+  padding: 24px;
+  min-width: 50px;
+  min-height: 50px;
+  flex-grow: 1;
+}

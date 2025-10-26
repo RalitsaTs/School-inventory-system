@@ -77,12 +77,8 @@ export class AuthService {
     return this.hasRole('Admin');
   }
 
-  isTeacher(): boolean {
-    return this.hasRole('Teacher');
-  }
-
-  isStudent(): boolean {
-    return this.hasRole('Student');
+  isUser(): boolean {
+    return this.hasRole('User');
   }
 
   private loadCurrentUser(): void {

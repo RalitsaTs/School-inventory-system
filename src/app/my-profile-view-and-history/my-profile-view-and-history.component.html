@@ -1,23 +1,111 @@
 <div class="column-layout profile-view-main-layout">
   <div class="column-layout profile-header-section">
     <h4 class="content">
-      My Profile and Borrowing History
+      {{ isAdmin ? 'Admin Profile and Management' : 'My Profile and Borrowing History' }}
     </h4>
     <p class="ig-typography__body-2 content">
-      View your email
+      {{ isAdmin ? 'Manage your profile and assign user roles' : 'View your email and borrowing history' }}
     </p>
   </div>
   <div class="column-layout profile-form-layout">
     <igx-input-group type="box" class="email-input">
-      <input type="email" [(ngModel)]="value" igxInput />
+      <input type="email" [(ngModel)]="value" igxInput readonly />
       <label igxLabel>Email</label>
     </igx-input-group>
   </div>
-  <div class="column-layout request-equipment-layout">
+  
+  <!-- Admin view with tabs -->
+  <div *ngIf="isAdmin" class="column-layout request-equipment-layout">
+    <igx-tabs>
+      <igx-tab-item>
+        <igx-tab-header>
+          <igx-icon>assignment_ind</igx-icon>
+          <span>Assign Roles</span>
+        </igx-tab-header>
+        <igx-tab-content>
+          <div class="column-layout role-assignment-section">
+            <h4 class="request-equipment-title">
+              Assign User Roles
+            </h4>
+            <form [formGroup]="roleAssignmentForm" (ngSubmit)="assignRole()" class="role-assignment-form">
+              <div class="form-row">
+                <igx-input-group type="box" class="form-input">
+                  <input type="email" formControlName="email" igxInput />
+                  <label igxLabel>User Email</label>
+                </igx-input-group>
+                <igx-select formControlName="role" class="form-select">
+                  <label igxLabel>Role</label>
+                  <igx-select-item *ngFor="let role of availableRoles" [value]="role">
+                    {{ role }}
+                  </igx-select-item>
+                </igx-select>
+                <button igxButton="contained" type="submit" [disabled]="!roleAssignmentForm.valid || isAssigning" class="assign-button">
+                  {{ isAssigning ? 'Assigning...' : 'Assign Role' }}
+                </button>
+              </div>
+            </form>
+            <div *ngIf="assignmentMessage" class="assignment-message" [class.success]="assignmentMessage.includes('Successfully')" [class.error]="!assignmentMessage.includes('Successfully')">
+              {{ assignmentMessage }}
+            </div>
+            
+            <!-- Users list -->
+            <div class="users-list-section">
+              <h5>All Users</h5>
+              <igx-grid [data]="allUsers" primaryKey="id" [allowFiltering]="true" filterMode="excelStyleFilter" width="100%" class="users-grid">
+                <igx-column field="email" dataType="string" header="Email" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+                <igx-column field="name" dataType="string" header="Name" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+                <igx-column field="roles" dataType="string" header="Roles" [filterable]="true" [sortable]="true" [selectable]="false">
+                  <ng-template igxCell let-cell="cell">
+                    {{ getUserRoles(cell.row.data) }}
+                  </ng-template>
+                </igx-column>
+                <igx-column field="emailConfirmed" dataType="boolean" header="Email Confirmed" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              </igx-grid>
+            </div>
+          </div>
+        </igx-tab-content>
+      </igx-tab-item>
+      
+      <igx-tab-item>
+        <igx-tab-header>
+          <igx-icon>history</igx-icon>
+          <span>Borrowing History</span>
+        </igx-tab-header>
+        <igx-tab-content>
+          <div class="column-layout borrowing-history-section">
+            <h4 class="request-equipment-title">
+              My borrowing history
+            </h4>
+            <igx-grid [data]="northwindEmployees" primaryKey="employeeID" [allowFiltering]="true" filterMode="excelStyleFilter" width="100%" class="grid">
+              <igx-column field="employeeID" dataType="number" header="employeeID" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="lastName" dataType="string" header="lastName" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="firstName" dataType="string" header="firstName" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="title" dataType="string" header="title" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="titleOfCourtesy" dataType="string" header="titleOfCourtesy" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="birthDate" dataType="date" header="birthDate" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="hireDate" dataType="date" header="hireDate" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="address.street" dataType="string" header="address street" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="address.city" dataType="string" header="address city" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="address.region" dataType="string" header="address region" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="address.postalCode" dataType="string" header="address postalCode" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="address.country" dataType="string" header="address country" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="address.phone" dataType="string" header="address phone" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="managerID" dataType="number" header="managerID" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="notes" dataType="string" header="notes" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+              <igx-column field="avatarUrl" dataType="string" header="avatarUrl" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
+            </igx-grid>
+          </div>
+        </igx-tab-content>
+      </igx-tab-item>
+    </igx-tabs>
+  </div>
+  
+  <!-- Regular user view -->
+  <div *ngIf="!isAdmin" class="column-layout request-equipment-layout">
     <h4 class="request-equipment-title">
       My borrowing history
     </h4>
-    <igx-grid [data]="northwindEmployees" primaryKey="employeeID" [allowFiltering]="true" filterMode="excelStyleFilter" width="1011px" class="grid">
+    <igx-grid [data]="northwindEmployees" primaryKey="employeeID" [allowFiltering]="true" filterMode="excelStyleFilter" width="100%" class="grid">
       <igx-column field="employeeID" dataType="number" header="employeeID" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
       <igx-column field="lastName" dataType="string" header="lastName" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>
       <igx-column field="firstName" dataType="string" header="firstName" [filterable]="true" [sortable]="true" [selectable]="false"></igx-column>

@@ -48,11 +48,10 @@
               <ng-template igxCell let-cell="cell">
                 <select 
                   class="role-select" 
-                  [value]="cell.row.data.roles?.[0] || 'Student'"
+                  [value]="cell.row.data.roles?.[0] || 'User'"
                   (change)="onRoleChange($event, cell.row.data)">
                   <option value="Admin">Admin</option>
-                  <option value="Teacher">Teacher</option>
-                  <option value="Student">Student</option>
+                  <option value="User">User</option>
                 </select>
               </ng-template>
             </igx-column>

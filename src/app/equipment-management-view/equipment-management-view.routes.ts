@@ -5,7 +5,7 @@ import { EquipmentsAdminViewComponent } from './equipments-admin-view/equipments
 import { EquipmentRequestsAndConditionUpdateViewComponent } from './equipment-requests-and-condition-update-view/equipment-requests-and-condition-update-view.component';
 import { RequestEquipmentComponent } from './request-equipment/request-equipment.component';
 import { MyRequestsComponent } from './my-requests/my-requests.component';
-import { authGuard, adminGuard, teacherOrAdminGuard } from '../guards/auth.guard';
+import { authGuard, adminGuard, userOrAdminGuard } from '../guards/auth.guard';
 
 export const routes: Routes = [
   { 
@@ -38,7 +38,7 @@ export const routes: Routes = [
       { 
         path: 'equipment-requests-and-condition-update-view', 
         component: EquipmentRequestsAndConditionUpdateViewComponent, 
-        canActivate: [teacherOrAdminGuard],
+        canActivate: [userOrAdminGuard],
         data: { text: 'Equipment-Requests-And-Condition-Update-View' } 
       },
     ]

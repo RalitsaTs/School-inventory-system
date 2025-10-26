@@ -30,17 +30,17 @@
 <div class="row-layout horizontal-group">
   <igx-nav-drawer [isOpen]="true" [pin]="true" width="320px" #dashboardNavDrawer class="dashboard-nav-drawer">
     <ng-template igxDrawer>
-      <div igxDrawerItem igxRipple [routerLink]="['/dashboard-view/student-dashboard']">
+      <div igxDrawerItem igxRipple [routerLink]="['/dashboard-view/user-dashboard']">
         <igx-icon class="icon">
           account_circle
         </igx-icon>
-        <span>Student Dashboard</span>
+        <span>User Dashboard</span>
       </div>
-      <div igxDrawerItem igxRipple [routerLink]="['/dashboard-view/teacher-dashboard']">
+      <div igxDrawerItem igxRipple [routerLink]="['/dashboard-view/admin-dashboard']">
         <igx-icon class="icon">
-          account_circle
+          admin_panel_settings
         </igx-icon>
-        <span>Teacher Dashboard</span>
+        <span>Admin Dashboard</span>
       </div>
       <div igxDrawerItem igxRipple [routerLink]="['/dashboard-view/request-equipment']">
         <igx-icon class="icon">

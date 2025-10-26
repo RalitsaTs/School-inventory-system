@@ -44,7 +44,7 @@ export class AdminViewComponent implements OnInit, OnDestroy {
   public allRequests: EquipmentRequest[] = [];
   public usageStats: any = null;
   public selectedUser: UserWithRoles | null = null;
-  public newUserRole = 'Student';
+  public newUserRole = 'User';
 
   constructor(
     private authService: AuthService,

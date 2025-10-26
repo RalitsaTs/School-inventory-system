@@ -61,7 +61,7 @@
         <span>My Requests</span>
       </div>
       
-      @if (authService.isAdmin() || authService.isTeacher()) {
+      @if (authService.isAdmin() || authService.isUser()) {
         <div igxDrawerItem igxRipple [routerLink]="['equipment-requests-and-condition-update-view']" routerLinkActive="active-nav-item">
           <igx-icon class="icon">
             pending_actions

@@ -1,0 +1,93 @@
+:host {
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+}
+.column-layout {
+  display: flex;
+  flex-direction: column;
+}
+.admin-view-layout {
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  gap: 24px;
+  overflow: auto;
+  position: relative;
+  padding: 24px;
+  min-width: 50px;
+  min-height: 50px;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+.admin-header {
+  justify-content: flex-start;
+  align-items: center;
+  align-content: flex-start;
+  gap: 8px;
+  position: relative;
+  min-width: 50px;
+  min-height: 50px;
+  flex-shrink: 0;
+}
+.tabs {
+  min-width: 0;
+  min-height: 0;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+.tab-item {
+  min-width: 100%;
+}
+.role-assignment-form {
+  justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  gap: 16px;
+  position: relative;
+  min-width: 50px;
+  min-height: 50px;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+.admin-title {
+  text-align: center;
+  height: max-content;
+  min-width: min-content;
+}
+.admin-description {
+  height: max-content;
+  min-width: min-content;
+}
+.row-layout {
+  display: flex;
+}
+.tab-item-content {
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  overflow: auto;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}
+.email-input {
+  width: 254px;
+  height: max-content;
+  min-width: min-content;
+  max-width: 254px;
+}
+.role-selection {
+  width: max-content;
+  height: max-content;
+}
+.assign-role-button {
+  --ig-size: var(--ig-size-medium);
+  width: 261px;
+  height: max-content;
+  min-width: 261px;
+  max-width: 261px;
+}

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "school-inventory-system": {
+    "school-inventory-system-z": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/school-inventory-system",
+            "outputPath": "dist/school-inventory-system-z",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "school-inventory-system:build:production"
+              "buildTarget": "school-inventory-system-z:build:production"
             },
             "development": {
-              "buildTarget": "school-inventory-system:build:development"
+              "buildTarget": "school-inventory-system-z:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "school-inventory-system:build"
+            "buildTarget": "school-inventory-system-z:build"
           }
         },
         "test": {

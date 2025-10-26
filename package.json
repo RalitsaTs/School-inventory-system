@@ -1,5 +1,5 @@
 {
-  "name": "school-inventory-system",
+  "name": "school-inventory-system-z",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -20,9 +20,7 @@
     "@angular/platform-browser-dynamic": "~20.3.0",
     "@angular/router": "~20.3.0",
     "hammerjs": "~2.0.8",
-    "igniteui-angular": "~20.1.0",
-    "igniteui-angular-charts": "~20.1.0",
-    "igniteui-angular-core": "~20.1.0",
+    "igniteui-angular": "^20.1.5",
     "minireset.css": "~0.0.7",
     "rxjs": "~7.8.1",
     "tslib": "~2.8.1",
@@ -44,6 +42,7 @@
     "@angular-eslint/template-parser": "~20.3.0",
     "@angular/cli": "~20.3.0",
     "@angular/compiler-cli": "~20.3.0",
+    "@igniteui/angular-schematics": "~20.1.1464",
     "@types/jasmine": "~5.1.4",
     "@typescript-eslint/eslint-plugin": "~8.45.0",
     "@typescript-eslint/parser": "~8.45.0",
@@ -51,7 +50,6 @@
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-unicorn": "^61.0.2",
-    "@igniteui/angular-schematics": "~20.1.1464",
     "jasmine-core": "~5.11.0",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",

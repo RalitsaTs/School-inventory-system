@@ -5,29 +5,59 @@
     </h4>
     <div class="column-layout login-inputs-column-layout">
       <igx-input-group type="border" class="email-input">
-        <input type="email" [(ngModel)]="value" required="true" igxInput #igxInput />
+        <input type="email" [(ngModel)]="email" required="true" igxInput #igxEmail />
         <label igxLabel>Email address</label>
-        @if (igxInput.validity.valueMissing) {
+        @if (igxEmail.validity.valueMissing) {
           <igx-hint>This field is required</igx-hint>
         }
       </igx-input-group>
       <igx-input-group type="border" class="email-input">
-        <input type="password" [(ngModel)]="value1" required="true" igxInput #igxInput1 />
+        <input type="password" [(ngModel)]="password" required="true" igxInput #igxPassword />
         <label igxLabel>Password</label>
-        @if (igxInput1.validity.valueMissing) {
+        @if (igxPassword.validity.valueMissing) {
           <igx-hint>This field is required</igx-hint>
         }
       </igx-input-group>
-      <button igxButton="contained" type="button" igxRipple class="sign-in-button">
-        Sign in
+      <igx-input-group type="border" class="email-input">
+        <input type="password" [(ngModel)]="confirmPassword" required="true" igxInput #igxConfirm />
+        <label igxLabel>Confirm Password</label>
+        @if (igxConfirm.validity.valueMissing) {
+          <igx-hint>This field is required</igx-hint>
+        }
+      </igx-input-group>
+      
+      @if (errorMessage) {
+        <div class="error-message ig-typography__body-2" style="color: red; margin-bottom: 1rem;">
+          {{ errorMessage }}
+        </div>
+      }
+      
+      @if (successMessage) {
+        <div class="success-message ig-typography__body-2" style="color: green; margin-bottom: 1rem;">
+          {{ successMessage }}
+        </div>
+      }
+      
+      <button 
+        igxButton="contained" 
+        type="button" 
+        igxRipple 
+        class="sign-in-button"
+        (click)="onRegister()"
+        [disabled]="isLoading">
+        @if (isLoading) {
+          Creating Account...
+        } @else {
+          Create Account
+        }
       </button>
     </div>
     <div class="row-layout create-account-row-layout">
       <p class="ig-typography__body-2 content">
-        Don't have an account?
+        Already have an account?
       </p>
-      <a target="_blank" class="ig-typography__body-2 create-account-link">
-        Create new account
+      <a routerLink="/login-view" class="ig-typography__body-2 create-account-link">
+        Sign in
       </a>
     </div>
   </div>

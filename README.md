@@ -1,4 +1,4 @@
-# School Inventory System
+# School Inventory System Z
 
 This project was generated with [App Builder Code Gen](https://www.appbuilder.dev/platform).
 

@@ -76,3 +76,50 @@
   --ig-size: var(--ig-size-medium);
   height: max-content;
 }
+
+// Demo Hints Styles
+.demo-hints {
+  background: var(--igx-gray-100);
+  border: 1px solid var(--igx-gray-300);
+  border-radius: var(--igx-border-radius);
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.demo-hints-title {
+  margin: 0 0 12px 0;
+  color: var(--igx-gray-600);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.demo-hints-content {
+  font-size: 0.8rem;
+  color: var(--igx-gray-600);
+  line-height: 1.4;
+}
+
+.demo-hint-item {
+  margin-bottom: 8px;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.hint-description {
+  margin-left: 20px;
+}
+
+.credential-code {
+  background: var(--igx-gray-200);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
+.error-message {
+  color: var(--igx-error-500);
+  margin-bottom: 1rem;
+}

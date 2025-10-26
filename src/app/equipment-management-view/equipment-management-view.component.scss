@@ -1,0 +1,62 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  gap: 0;
+}
+.dashboard-nav-bar {
+  height: max-content;
+  min-width: min-content;
+}
+.dashboard-nav-drawer {
+  min-width: min-content;
+  min-height: 0;
+  max-width: 320px;
+  flex-shrink: 0;
+}
+.page-container {
+  overflow: auto;
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  flex-grow: 1;
+}
+.navbar-content {
+  gap: 1rem;
+}
+.h6 {
+  margin: 0;
+}
+.icon {
+  --size: 24px;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+.row-layout {
+  display: flex;
+}
+.horizontal-group {
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  gap: 0;
+  position: relative;
+  min-width: 50px;
+  min-height: 50px;
+  flex-grow: 1;
+}
+
+.user-welcome {
+  margin-right: 1rem;
+  color: var(--igx-secondary-500);
+  font-size: 0.875rem;
+}
+
+.active-nav-item {
+  background-color: var(--igx-primary-50);
+  color: var(--igx-primary-600);
+}

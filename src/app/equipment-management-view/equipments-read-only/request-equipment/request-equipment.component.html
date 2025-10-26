@@ -1,0 +1,35 @@
+<div class="column-layout request-equipment-layout">
+  <h4 class="request-equipment-title">
+    Request Equipment
+  </h4>
+  <igx-select type="box" [(ngModel)]="value" required="true" class="equipment-dropdown">
+    <igx-select-item value="1">
+      Camera Canon 70D
+    </igx-select-item>
+    <label igxLabel>Equipment</label>
+  </igx-select>
+  <igx-date-picker [(ngModel)]="value1" required="true" type="border" class="user-input">
+    <igx-icon class="start-date-prefix-icon">
+      event
+    </igx-icon>
+    <label igxLabel>Start Date</label>
+  </igx-date-picker>
+  <igx-date-picker [(ngModel)]="value2" required="true" type="border" class="user-input">
+    <igx-icon class="start-date-prefix-icon">
+      event
+    </igx-icon>
+    <label igxLabel>End Date</label>
+  </igx-date-picker>
+  <igx-input-group type="box" class="user-input">
+    <label igxLabel>Notes</label>
+    <textarea placeholder="I need the camera for a class project." igxInput></textarea>
+  </igx-input-group>
+  <div class="row-layout request-buttons-row">
+    <button igxButton="contained" type="button" igxRipple class="submit-request-button">
+      Submit Request
+    </button>
+    <button igxButton="outlined" type="button" igxRipple [routerLink]="['/equipment-management-view']" class="submit-request-button">
+      Cancel
+    </button>
+  </div>
+</div>

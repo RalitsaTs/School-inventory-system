@@ -1,0 +1,40 @@
+<div class="equipment-list-container">
+  <div class="header-section">
+    <h2>Equipment Inventory</h2>
+    <p>Browse all available equipment in the system</p>
+  </div>
+
+  <div class="search-section">
+    <igx-input-group type="search">
+      <input igxInput [(ngModel)]="searchText" (ngModelChange)="onSearchChange()" placeholder="Search equipment..." />
+      <label igxLabel>Search</label>
+    </igx-input-group>
+  </div>
+
+  <igx-grid 
+    [data]="equipment" 
+    [allowFiltering]="true"
+    [filterMode]="'excelStyleFilter'"
+    height="500px"
+    width="100%">
+    
+    <igx-column field="name" header="Name" [sortable]="true" [filterable]="true"></igx-column>
+    <igx-column field="type" header="Type" [sortable]="true" [filterable]="true"></igx-column>
+    <igx-column field="location" header="Location" [sortable]="true" [filterable]="true"></igx-column>
+    <igx-column field="condition" header="Condition" [sortable]="true" [filterable]="true"></igx-column>
+    <igx-column field="status" header="Status" [sortable]="true" [filterable]="true"></igx-column>
+    
+    <igx-column field="actions" header="Actions" [sortable]="false" [filterable]="false">
+      <ng-template igxCell let-cell="cell">
+        <button 
+          igxButton="outlined" 
+          igxRipple 
+          [routerLink]="['/equipment-management-view/request-equipment']"
+          [disabled]="cell.row.data.status !== 'Available'">
+          <igx-icon>add_shopping_cart</igx-icon>
+          Request
+        </button>
+      </ng-template>
+    </igx-column>
+  </igx-grid>
+</div>

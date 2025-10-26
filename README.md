@@ -1,33 +1,51 @@
-# School Inventory System Z
+# 🎓 School Inventory Management System Z
 
-This project was generated with [App Builder Code Gen](https://www.appbuilder.dev/platform).
+A full-stack web application developed as part of a mentoring project with four students.  
+The system helps schools manage their equipment, track borrowing requests, and maintain an organized digital inventory.
 
-## Development server
 
-Run `npm start` to build the application, start a web server and open the application in the default browser. The application will open in `http://localhost:4200/` by default.
+## 🚀 Live Demo
 
-## Build
+**Frontend (Angular App):**  
+[https://ralitsats.github.io/School-inventory-system](https://ralitsats.github.io/School-inventory-system)
 
-Run `npm run build` to build the application into an output directory.
+**Backend (Web API – Swagger UI):**  
+[https://inventory-management-2025-gemini-team-deerdkahe8b7hjfz.canadacentral-01.azurewebsites.net/swagger/index.html](https://inventory-management-2025-gemini-team-deerdkahe8b7hjfz.canadacentral-01.azurewebsites.net/swagger/index.html)
 
-## Running unit tests
+**Backend Source Code:**  
+[GitHub – InventoryManagement25](https://github.com/zdrawku/InventoryManagement25)
 
-Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io). Runs all `.spec.ts` files under `./src` folder.
 
-## Running code style checks
+## 🧭 Project Overview
 
-Run `npm run lint` to execute the code styling rules for the project.
+The goal of this project was to give students hands-on experience with modern full-stack development.  
+The students built the frontend and backend from scratch, while I provided mentoring, guidance, and final integration between both systems.
 
-## Licensing
+The final product demonstrates:
+- A modern Angular-based frontend for managing school equipment
+- A secure ASP.NET Core backend with authentication and data persistence
+- A working deployment on Azure for public access
 
-See the [License FAQ and Installation documentation](https://www.infragistics.com/products/ignite-ui-angular/angular/components/general/ignite-ui-licensing) for information on how to upgrade to the full licensed package, if the project is using a Trial version of Ignite UI for Angular, and how to setup your environment and CI to use our licensed npm feed.
 
-If you're downloading the project as a .zip file, you still need to follow the steps in the License FAQ to configure access to the licensed feed before installing dependencies.
+## 🖥️ Frontend Overview
 
-Alternatively run `npm run infragistics-login` for a guided login to our licensed feed.
+**Built with:** Angular 20, TypeScript, RxJS, Ignite UI for Angular
 
-## Additional resources
+**Key Features:**
+- Role-based access for Students and Admins
+- Login, registration, and profile management
+- Equipment browsing and request submission
+- Admin dashboard with CRUD operations
+- Responsive design and modern UI components
 
-- Ignite UI Angular Schematics were used to generate this project and are available for additional commands within the project. For more details and how to use them, refer to [Angular Schematics & Ignite UI CLI](https://www.infragistics.com/products/ignite-ui-angular/angular/components/general/cli-overview).
+**Technical Highlights:**
+- Standalone components (no NgModules)
+- Lazy-loaded routes for better performance
+- Signal-based reactivity and modular architecture
+- Data grid with filtering, sorting, and inline actions
+- Hosted on GitHub Pages
 
-- [Ignite UI for Angular](https://www.infragistics.com/products/ignite-ui-angular) - to learn more about the product or to dive into component specifics and showcases.
+**Run Locally:**
+```bash
+npm install
+npm start

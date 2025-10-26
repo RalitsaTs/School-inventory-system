@@ -4,12 +4,11 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export interface UsageReport {
-  totalEquipment: number;
-  availableCount: number;
-  checkedOutCount: number;
-  underRepairCount: number;
-  unavailableCount: number;
-  retiredCount: number;
+  total: number;
+  available: number;
+  checkedOut: number;
+  pending: number;
+  approved: number;
 }
 
 export interface HistoryItem {

@@ -158,8 +158,23 @@
   color: #ffc107; 
 }
 
+.stat-value.pending { 
+  color: #17a2b8; 
+}
+
+.stat-value.approved { 
+  color: #28a745; 
+}
+
 .stat-value.under-repair { 
   color: #dc3545; 
+}
+
+.loading-message {
+  padding: 20px;
+  text-align: center;
+  color: var(--igx-gray-600);
+  font-style: italic;
 }
 
 .export-section {

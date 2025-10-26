@@ -160,20 +160,29 @@
             <div class="stats-cards">
               <div class="stat-card">
                 <h6>Total Equipment</h6>
-                <span class="stat-value">{{ usageStats.totalEquipment }}</span>
+                <span class="stat-value">{{ usageStats.total }}</span>
               </div>
               <div class="stat-card">
                 <h6>Available</h6>
-                <span class="stat-value available">{{ usageStats.availableCount }}</span>
+                <span class="stat-value available">{{ usageStats.available }}</span>
               </div>
               <div class="stat-card">
                 <h6>Checked Out</h6>
-                <span class="stat-value checked-out">{{ usageStats.checkedOutCount }}</span>
+                <span class="stat-value checked-out">{{ usageStats.checkedOut }}</span>
               </div>
               <div class="stat-card">
-                <h6>Under Repair</h6>
-                <span class="stat-value under-repair">{{ usageStats.underRepairCount }}</span>
+                <h6>Pending Requests</h6>
+                <span class="stat-value pending">{{ usageStats.pending }}</span>
               </div>
+              <div class="stat-card">
+                <h6>Approved Requests</h6>
+                <span class="stat-value approved">{{ usageStats.approved }}</span>
+              </div>
+            </div>
+          } @else {
+            <div class="loading-message">
+              <p>Loading usage statistics...</p>
+              <p><small>Debug: usageStats = {{ usageStats | json }}</small></p>
             </div>
           }
           

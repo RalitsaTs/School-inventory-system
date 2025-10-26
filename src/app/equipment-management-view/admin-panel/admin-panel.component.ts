@@ -99,6 +99,7 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (stats) => {
+          console.log('Usage stats loaded:', stats);
           this.usageStats = stats;
         },
         error: (error) => {

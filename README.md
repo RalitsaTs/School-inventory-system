@@ -1,4 +1,4 @@
-# 🎓 School Inventory Management System Z
+# 🎓 School Inventory Management System
 
 A full-stack web application developed as part of a mentoring project with four students.  
 The system helps schools manage their equipment, track borrowing requests, and maintain an organized digital inventory.

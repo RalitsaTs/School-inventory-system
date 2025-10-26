@@ -21,7 +21,7 @@ export class EquipmentRequestService {
   }
 
   getMyRequests(): Observable<EquipmentRequest[]> {
-    return this.http.get<EquipmentRequest[]>(`${this.baseUrl}/mine`);
+    return this.http.get<EquipmentRequest[]>(`${environment.apiUrl}/requests/mine`);
   }
 
   getUserRequests(userId: string): Observable<EquipmentRequest[]> {

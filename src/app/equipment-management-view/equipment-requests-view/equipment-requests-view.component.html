@@ -1,7 +1,8 @@
 <div class="equipment-requests-container">
   <div class="header-section">
-    <h2>Equipment Requests Management</h2>
-    <p>Review and manage all equipment requests in the system.</p>
+    <h4>Equipment Requests Management</h4>
+    <br />
+    <h5>Approve or Reject equipment requests in the system</h5>
   </div>
   
   <igx-grid 
@@ -10,33 +11,33 @@
     height="600px"
     width="100%">
     
-    <igx-column field="id" header="ID" [sortable]="true" [filterable]="true" width="80px"></igx-column>
+    <igx-column field="id" header="ID" [sortable]="true" [filterable]="true"></igx-column>
     
-    <igx-column field="equipment.name" header="Equipment" [sortable]="true" [filterable]="true" width="200px">
+    <igx-column field="equipment.name" header="Equipment" [sortable]="true" [filterable]="true" >
       <ng-template igxCell let-cell="cell">
         {{ cell.row.data.equipment?.name || 'N/A' }}
       </ng-template>
     </igx-column>
     
-    <igx-column field="requestedAt" header="Requested" [sortable]="true" [filterable]="true" width="120px">
+    <igx-column field="requestedAt" header="Requested" [sortable]="true" [filterable]="true" >
       <ng-template igxCell let-cell="cell">
         {{ formatDate(cell.value) }}
       </ng-template>
     </igx-column>
     
-    <igx-column field="start" header="Start" [sortable]="true" [filterable]="true" width="120px">
+    <igx-column field="start" header="Start" [sortable]="true" [filterable]="true" >
       <ng-template igxCell let-cell="cell">
         {{ formatDate(cell.value) }}
       </ng-template>
     </igx-column>
     
-    <igx-column field="end" header="End" [sortable]="true" [filterable]="true" width="120px">
+    <igx-column field="end" header="End" [sortable]="true" [filterable]="true" >
       <ng-template igxCell let-cell="cell">
         {{ formatDate(cell.value) }}
       </ng-template>
     </igx-column>
     
-    <igx-column field="status" header="Status" [sortable]="true" [filterable]="true" width="120px">
+    <igx-column field="status" header="Status" [sortable]="true" [filterable]="true" >
       <ng-template igxCell let-cell="cell">
         <span [class]="getStatusClass(cell.value)" class="status-badge">
           {{ cell.value }}
@@ -44,7 +45,7 @@
       </ng-template>
     </igx-column>
     
-    <igx-column header="Actions" [sortable]="false" [filterable]="false" width="180px">
+    <igx-column header="Actions" [sortable]="false" [filterable]="false" >
       <ng-template igxCell let-cell="cell">
         @if (cell.row.data.status === 'Pending') {
           <div class="action-buttons">

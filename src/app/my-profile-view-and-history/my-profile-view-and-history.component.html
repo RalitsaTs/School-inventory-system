@@ -1,10 +1,10 @@
 <div class="column-layout profile-view-main-layout">
   <div class="column-layout profile-header-section">
     <h4 class="content">
-      {{ isAdmin ? 'Admin Profile and Management' : 'My Profile and History' }}
+      {{ isAdmin ? 'Admin Profile and Management' : 'My User Profile and History' }}
     </h4>
     <p class="ig-typography__body-2 content">
-      {{ isAdmin ? 'Manage your profile and assign user roles' : 'View your email, requests, and borrowing history' }}
+      {{ isAdmin ? 'View your email, requests, and history as Admin' : 'View your email, requests, and borrowing history' }}
     </p>
   </div>
   <div class="column-layout profile-form-layout">
@@ -17,63 +17,7 @@
   <!-- Admin view with tabs -->
   <div *ngIf="isAdmin" class="column-layout tabs-container">
     <igx-tabs class="full-width-tabs">
-      <igx-tab-item>
-        <igx-tab-header>
-          <igx-icon>assignment_ind</igx-icon>
-          <span>Assign Roles</span>
-        </igx-tab-header>
-        <igx-tab-content>
-          <div class="column-layout role-assignment-section">
-            <h4 class="request-equipment-title">
-              Assign User Roles
-            </h4>
-            <form [formGroup]="roleAssignmentForm" (ngSubmit)="assignRole()" class="role-assignment-form">
-              <div class="form-row">
-                <igx-input-group type="box" class="form-input">
-                  <input type="email" formControlName="email" igxInput />
-                  <label igxLabel>User Email</label>
-                </igx-input-group>
-                <igx-select formControlName="role" class="form-select">
-                  <label igxLabel>Role</label>
-                  <igx-select-item *ngFor="let role of availableRoles" [value]="role">
-                    {{ role }}
-                  </igx-select-item>
-                </igx-select>
-                <button igxButton="contained" type="submit" [disabled]="!roleAssignmentForm.valid || isAssigning"
-                  class="assign-button">
-                  {{ isAssigning ? 'Assigning...' : 'Assign Role' }}
-                </button>
-              </div>
-            </form>
-            <div *ngIf="assignmentMessage" class="assignment-message"
-              [class.success]="assignmentMessage.includes('Successfully')"
-              [class.error]="!assignmentMessage.includes('Successfully')">
-              {{ assignmentMessage }}
-            </div>
-
-            <!-- Users list -->
-            <div class="users-list-section">
-              <h5>All Users</h5>
-              <igx-grid [data]="allUsers" primaryKey="id" [allowFiltering]="true" filterMode="excelStyleFilter"
-                width="100%" class="users-grid">
-                <igx-column field="email" dataType="string" header="Email" [filterable]="true" [sortable]="true"
-                  [selectable]="false"></igx-column>
-                <igx-column field="name" dataType="string" header="Name" [filterable]="true" [sortable]="true"
-                  [selectable]="false"></igx-column>
-                <igx-column field="roles" dataType="string" header="Roles" [filterable]="true" [sortable]="true"
-                  [selectable]="false">
-                  <ng-template igxCell let-cell="cell">
-                    {{ getUserRoles(cell.row.data) }}
-                  </ng-template>
-                </igx-column>
-                <igx-column field="emailConfirmed" dataType="boolean" header="Email Confirmed" [filterable]="true"
-                  [sortable]="true" [selectable]="false"></igx-column>
-              </igx-grid>
-            </div>
-          </div>
-        </igx-tab-content>
-      </igx-tab-item>
-
+      
       <igx-tab-item>
         <igx-tab-header>
           <igx-icon>list_alt</igx-icon>
@@ -163,12 +107,12 @@
             @if (isLoadingHistory) {
             <div class="loading-indicator">Loading history...</div>
             }
-            <igx-grid [data]="activityHistory" [allowFiltering]="true" filterMode="excelStyleFilter" height="600px"
+            <igx-grid [data]="activityHistory" [allowFiltering]="true" filterMode="excelStyleFilter" height="400px"
               width="100%" class="activity-grid">
 
-              <igx-column field="id" header="ID" [sortable]="true" [filterable]="true" width="80px"></igx-column>
+              <igx-column field="id" header="ID" [sortable]="true" [filterable]="true" ></igx-column>
 
-              <igx-column field="action" header="Action" [sortable]="true" [filterable]="true" width="250px">
+              <igx-column field="action" header="Action" [sortable]="true" [filterable]="true" >
                 <ng-template igxCell let-cell="cell">
                   <span [class]="getActionClass(cell.value)" class="action-badge">
                     {{ cell.value }}
@@ -177,12 +121,12 @@
               </igx-column>
 
               <igx-column field="equipmentId" header="Equipment ID" [sortable]="true" [filterable]="true"
-                width="200px"></igx-column>
+                ></igx-column>
 
               <igx-column field="userId" header="User " [sortable]="true" [filterable]="true"
-                width="150px"></igx-column>
+                ></igx-column>
 
-              <igx-column field="timestamp" header="Date & Time" [sortable]="true" [filterable]="true" width="250px">
+              <igx-column field="timestamp" header="Date & Time" [sortable]="true" [filterable]="true" >
                 <ng-template igxCell let-cell="cell">
                   {{ formatDate(cell.value) }}
                 </ng-template>

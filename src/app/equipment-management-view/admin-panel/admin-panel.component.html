@@ -1,11 +1,12 @@
 <div class="column-layout admin-view-layout">
-  <div class="column-layout admin-header">
-    <h4 class="admin-title">
+  <div class="header-section">
+    <h4>
       Administrator Dashboard
     </h4>
-    <p class="admin-description">
-      Manage users, equipment requests, and system reports.
-    </p>
+    <br />
+    <h5>
+      Manage user roles, equipments, equipment requests, and system reports.
+    </h5>
   </div>
 
   <igx-tabs class="tabs">
@@ -53,6 +54,115 @@
                   <option value="Admin">Admin</option>
                   <option value="User">User</option>
                 </select>
+              </ng-template>
+            </igx-column>
+          </igx-grid>
+        </div>
+      </igx-tab-content>
+    </igx-tab-item>
+
+    
+    <!-- Equipment Management Tab -->
+    <igx-tab-item class="tab-item">
+      <igx-tab-header>
+        <igx-icon igxTabHeaderIcon>devices</igx-icon>
+        <span igxTabHeaderLabel>Equipment Management</span>
+      </igx-tab-header>
+      <igx-tab-content class="tab-item-content">
+        <div class="equipment-management-section">
+          <h3 class="section-title">Equipment Management</h3>
+          <h5>Manage Equipment Inventory</h5>
+          <p>Add, update, and remove equipment from the inventory system.</p>
+          
+          <div class="equipment-actions">
+            <button 
+              igxButton="contained" 
+              igxRipple 
+              (click)="addNewEquipment()"
+              class="add-equipment-btn">
+              <igx-icon>add</igx-icon>
+              Add New Equipment
+            </button>
+          </div>
+          
+          <igx-grid 
+            #equipmentGrid
+            [data]="equipment" 
+            [rowEditable]="true"
+            [allowFiltering]="true"
+            [primaryKey]="'equipmentId'"
+            (rowEditEnter)="onRowEditEnter($event)"
+            (rowEdit)="onRowEdit($event)"
+            (rowEditDone)="onRowEditDone($event)"
+            (rowEditExit)="onRowEditExit($event)"
+            height="500px"
+            width="100%">
+            
+            <igx-column field="equipmentId" header="ID" [sortable]="true" [filterable]="true" [editable]="false"></igx-column>
+            
+            <igx-column field="name" header="Name" [sortable]="true" [filterable]="true" [editable]="true" [required]="true"></igx-column>
+            
+            <igx-column field="type" header="Type" [sortable]="true" [filterable]="true" [editable]="true"></igx-column>
+            
+            <igx-column field="serialNumber" header="Serial Number" [sortable]="true" [filterable]="true" [editable]="true"></igx-column>
+            
+            <igx-column field="condition" header="Condition" [sortable]="true" [filterable]="true" [editable]="true">
+              <ng-template igxCellEditor let-cell="cell">
+                <igx-select [(ngModel)]="cell.value" class="condition-select">
+                  <igx-select-item value="Excellent">Excellent</igx-select-item>
+                  <igx-select-item value="Good">Good</igx-select-item>
+                  <igx-select-item value="Fair">Fair</igx-select-item>
+                  <igx-select-item value="Damaged">Damaged</igx-select-item>
+                </igx-select>
+              </ng-template>
+              <ng-template igxCell let-cell="cell">
+                <span [class]="getConditionClass(cell.value)" class="condition-badge">
+                  {{ cell.value }}
+                </span>
+              </ng-template>
+            </igx-column>
+            
+            <igx-column field="status" header="Status" [sortable]="true" [filterable]="true" [editable]="true">
+              <ng-template igxCellEditor let-cell="cell">
+                <igx-select [(ngModel)]="cell.value" class="status-select">
+                  <igx-select-item value="Available">Available</igx-select-item>
+                  <igx-select-item value="CheckedOut">Checked Out</igx-select-item>
+                  <igx-select-item value="UnderRepair">Under Repair</igx-select-item>
+                  <igx-select-item value="Retired">Retired</igx-select-item>
+                  <igx-select-item value="Unavailable">Unavailable</igx-select-item>
+                </igx-select>
+              </ng-template>
+              <ng-template igxCell let-cell="cell">
+                <span [class]="getEquipmentStatusClass(cell.value)" class="status-badge">
+                  {{ getStatusDisplayText(cell.value) }}
+                </span>
+              </ng-template>
+            </igx-column>
+            
+            <igx-column field="location" header="Location" [sortable]="true" [filterable]="true" [editable]="true"></igx-column>
+            
+            <igx-column field="isSensitive" header="Sensitive" [sortable]="true" [filterable]="true" [editable]="true">
+              <ng-template igxCellEditor let-cell="cell">
+                <igx-checkbox [(ngModel)]="cell.value"></igx-checkbox>
+              </ng-template>
+              <ng-template igxCell let-cell="cell">
+                <igx-icon [style.color]="cell.value ? 'orange' : 'gray'">
+                  {{ cell.value ? 'warning' : 'check_circle' }}
+                </igx-icon>
+              </ng-template>
+            </igx-column>
+            
+            <igx-column header="Actions" [sortable]="false" [filterable]="false">
+              <ng-template igxCell let-cell="cell">
+                <div class="equipment-action-buttons">
+                  <button 
+                    igxButton="outlined" 
+                    igxRipple 
+                    (click)="deleteEquipment(cell.row.data)"
+                    title="Delete Equipment">
+                    <igx-icon>delete</igx-icon>
+                  </button>
+                </div>
               </ng-template>
             </igx-column>
           </igx-grid>
@@ -201,113 +311,6 @@
       </igx-tab-content>
     </igx-tab-item>
 
-    <!-- Equipment Management Tab -->
-    <igx-tab-item class="tab-item">
-      <igx-tab-header>
-        <igx-icon igxTabHeaderIcon>devices</igx-icon>
-        <span igxTabHeaderLabel>Equipment Management</span>
-      </igx-tab-header>
-      <igx-tab-content class="tab-item-content">
-        <div class="equipment-management-section">
-          <h3 class="section-title">Equipment Management</h3>
-          <h5>Manage Equipment Inventory</h5>
-          <p>Add, update, and remove equipment from the inventory system.</p>
-          
-          <div class="equipment-actions">
-            <button 
-              igxButton="contained" 
-              igxRipple 
-              (click)="addNewEquipment()"
-              class="add-equipment-btn">
-              <igx-icon>add</igx-icon>
-              Add New Equipment
-            </button>
-          </div>
-          
-          <igx-grid 
-            #equipmentGrid
-            [data]="equipment" 
-            [rowEditable]="true"
-            [allowFiltering]="true"
-            [primaryKey]="'equipmentId'"
-            (rowEditEnter)="onRowEditEnter($event)"
-            (rowEdit)="onRowEdit($event)"
-            (rowEditDone)="onRowEditDone($event)"
-            (rowEditExit)="onRowEditExit($event)"
-            height="500px"
-            width="100%">
-            
-            <igx-column field="equipmentId" header="ID" [sortable]="true" [filterable]="true" [editable]="false"></igx-column>
-            
-            <igx-column field="name" header="Name" [sortable]="true" [filterable]="true" [editable]="true" [required]="true"></igx-column>
-            
-            <igx-column field="type" header="Type" [sortable]="true" [filterable]="true" [editable]="true"></igx-column>
-            
-            <igx-column field="serialNumber" header="Serial Number" [sortable]="true" [filterable]="true" [editable]="true"></igx-column>
-            
-            <igx-column field="condition" header="Condition" [sortable]="true" [filterable]="true" [editable]="true">
-              <ng-template igxCellEditor let-cell="cell">
-                <igx-select [(ngModel)]="cell.value" class="condition-select">
-                  <igx-select-item value="Excellent">Excellent</igx-select-item>
-                  <igx-select-item value="Good">Good</igx-select-item>
-                  <igx-select-item value="Fair">Fair</igx-select-item>
-                  <igx-select-item value="Damaged">Damaged</igx-select-item>
-                </igx-select>
-              </ng-template>
-              <ng-template igxCell let-cell="cell">
-                <span [class]="getConditionClass(cell.value)" class="condition-badge">
-                  {{ cell.value }}
-                </span>
-              </ng-template>
-            </igx-column>
-            
-            <igx-column field="status" header="Status" [sortable]="true" [filterable]="true" [editable]="true">
-              <ng-template igxCellEditor let-cell="cell">
-                <igx-select [(ngModel)]="cell.value" class="status-select">
-                  <igx-select-item value="Available">Available</igx-select-item>
-                  <igx-select-item value="CheckedOut">Checked Out</igx-select-item>
-                  <igx-select-item value="UnderRepair">Under Repair</igx-select-item>
-                  <igx-select-item value="Retired">Retired</igx-select-item>
-                  <igx-select-item value="Unavailable">Unavailable</igx-select-item>
-                </igx-select>
-              </ng-template>
-              <ng-template igxCell let-cell="cell">
-                <span [class]="getEquipmentStatusClass(cell.value)" class="status-badge">
-                  {{ getStatusDisplayText(cell.value) }}
-                </span>
-              </ng-template>
-            </igx-column>
-            
-            <igx-column field="location" header="Location" [sortable]="true" [filterable]="true" [editable]="true"></igx-column>
-            
-            <igx-column field="isSensitive" header="Sensitive" [sortable]="true" [filterable]="true" [editable]="true">
-              <ng-template igxCellEditor let-cell="cell">
-                <igx-checkbox [(ngModel)]="cell.value"></igx-checkbox>
-              </ng-template>
-              <ng-template igxCell let-cell="cell">
-                <igx-icon [style.color]="cell.value ? 'orange' : 'gray'">
-                  {{ cell.value ? 'warning' : 'check_circle' }}
-                </igx-icon>
-              </ng-template>
-            </igx-column>
-            
-            <igx-column header="Actions" [sortable]="false" [filterable]="false">
-              <ng-template igxCell let-cell="cell">
-                <div class="equipment-action-buttons">
-                  <button 
-                    igxButton="outlined" 
-                    igxRipple 
-                    (click)="deleteEquipment(cell.row.data)"
-                    title="Delete Equipment">
-                    <igx-icon>delete</igx-icon>
-                  </button>
-                </div>
-              </ng-template>
-            </igx-column>
-          </igx-grid>
-        </div>
-      </igx-tab-content>
-    </igx-tab-item>
   </igx-tabs>
 
   <igx-snackbar #snackbar></igx-snackbar>

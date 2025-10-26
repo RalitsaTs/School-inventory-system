@@ -1,7 +1,8 @@
 <div class="my-requests-container">
   <div class="header-section">
-    <h2>My Equipment Requests</h2>
-    <p>View and manage your equipment requests.</p>
+    <h4>My Equipment Requests</h4>
+    <br />
+    <h5>View your equipment requests.</h5>
   </div>
 
   <igx-grid 
@@ -14,7 +15,7 @@
     
     <igx-column field="id" header="Request ID" [sortable]="true" [filterable]="true" width="100px"></igx-column>
     
-    <igx-column field="equipment.name" header="Equipment" [sortable]="true" [filterable]="true" width="200px">
+    <igx-column field="equipment.name" header="Equipment" [sortable]="true" [filterable]="true" >
       <ng-template igxCell let-cell="cell">
         <div class="equipment-info">
           <strong>{{ cell.row.data.equipment?.name || 'N/A' }}</strong>
@@ -24,25 +25,25 @@
       </ng-template>
     </igx-column>
     
-    <igx-column field="requestedAt" header="Requested" [sortable]="true" [filterable]="true" width="120px">
+    <igx-column field="requestedAt" header="Requested" [sortable]="true" [filterable]="true" >
       <ng-template igxCell let-cell="cell">
         {{ formatDate(cell.value) }}
       </ng-template>
     </igx-column>
     
-    <igx-column field="start" header="Start Date" [sortable]="true" [filterable]="true" width="120px">
+    <igx-column field="start" header="Start Date" [sortable]="true" [filterable]="true" >
       <ng-template igxCell let-cell="cell">
         {{ formatDate(cell.value) }}
       </ng-template>
     </igx-column>
     
-    <igx-column field="end" header="End Date" [sortable]="true" [filterable]="true" width="120px">
+    <igx-column field="end" header="End Date" [sortable]="true" [filterable]="true" >
       <ng-template igxCell let-cell="cell">
         {{ formatDate(cell.value) }}
       </ng-template>
     </igx-column>
     
-    <igx-column field="status" header="Status" [sortable]="true" [filterable]="true" width="120px">
+    <igx-column field="status" header="Status" [sortable]="true" [filterable]="true" >
       <ng-template igxCell let-cell="cell">
         <span [class]="getStatusClass(cell.value)" class="status-badge">
           {{ cell.value }}
@@ -50,25 +51,25 @@
       </ng-template>
     </igx-column>
     
-    <igx-column field="notes" header="Notes" [sortable]="false" [filterable]="true" width="150px">
+    <igx-column field="notes" header="Notes" [sortable]="false" [filterable]="true" >
       <ng-template igxCell let-cell="cell">
         <span [title]="cell.value">{{ truncateText(cell.value, 50) }}</span>
       </ng-template>
     </igx-column>
     
-    <igx-column field="approvedAt" header="Approved" [sortable]="true" [filterable]="true" width="120px">
+    <igx-column field="approvedAt" header="Approved" [sortable]="true" [filterable]="true" >
       <ng-template igxCell let-cell="cell">
         {{ cell.value ? formatDate(cell.value) : '-' }}
       </ng-template>
     </igx-column>
     
-    <igx-column field="returnedAt" header="Returned" [sortable]="true" [filterable]="true" width="120px">
+    <igx-column field="returnedAt" header="Returned" [sortable]="true" [filterable]="true" >
       <ng-template igxCell let-cell="cell">
         {{ cell.value ? formatDate(cell.value) : '-' }}
       </ng-template>
     </igx-column>
     
-    <igx-column header="Actions" [sortable]="false" [filterable]="false" width="120px">
+    <igx-column header="Actions" [sortable]="false" [filterable]="false" >
       <ng-template igxCell let-cell="cell">
         @if (cell.row.data.status === 'Approved' && !cell.row.data.returnedAt) {
           <button 

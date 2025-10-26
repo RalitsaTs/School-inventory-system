@@ -6,7 +6,7 @@
     "projectType": "igx-ts",
     "projectTemplate": "base",
     "theme": "Default",
-    "themePath": "node_modules/@infragistics/igniteui-angular/styles/igniteui-angular.css",
+    "themePath": "node_modules/igniteui-angular/styles/igniteui-angular.css",
     "isBundle": false,
     "bundleFilePath": "",
     "igniteuiSource": "",

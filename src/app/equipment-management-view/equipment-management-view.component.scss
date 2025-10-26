@@ -49,3 +49,14 @@
   min-height: 50px;
   flex-grow: 1;
 }
+
+.user-welcome {
+  margin-right: 1rem;
+  color: var(--igx-secondary-500);
+  font-size: 0.875rem;
+}
+
+.active-nav-item {
+  background-color: var(--igx-primary-50);
+  color: var(--igx-primary-600);
+}

@@ -2,10 +2,12 @@ import { ApplicationConfig, ErrorHandler, Provider, importProvidersFrom } from '
 import { provideRouter } from '@angular/router';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { GlobalErrorHandlerService } from './error-routing/error/global-error-handler.service';
 import { environment } from '../environments/environment';
+import { authInterceptor } from './interceptors/auth.interceptor';
 
 // provide the HAMMER_GESTURE_CONFIG token
 // to override the default settings of the HammerModule
@@ -13,7 +15,8 @@ import { environment } from '../environments/environment';
 const providers: Provider = [
   provideRouter(routes),
   importProvidersFrom(BrowserModule, HammerModule),
-  provideAnimations()
+  provideAnimations(),
+  provideHttpClient(withInterceptors([authInterceptor]))
 ];
 
 if (environment.production) {

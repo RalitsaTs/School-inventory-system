@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IGX_GRID_DIRECTIVES, IGX_INPUT_GROUP_DIRECTIVES } from '@infragistics/igniteui-angular';
+import { IGX_GRID_DIRECTIVES, IGX_INPUT_GROUP_DIRECTIVES } from 'igniteui-angular';
 import { Subject, takeUntil } from 'rxjs';
 import { EmployeesType } from '../models/northwind/employees-type';
 import { NorthwindService } from '../services/northwind.service';

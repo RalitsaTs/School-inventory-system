@@ -5,28 +5,45 @@
     </h4>
     <div class="column-layout login-inputs-column-layout">
       <igx-input-group type="border" class="email-input">
-        <input type="email" [(ngModel)]="value" required="true" igxInput #igxInput />
+        <input type="email" [(ngModel)]="email" required="true" igxInput #igxInput />
         <label igxLabel>Email address</label>
         @if (igxInput.validity.valueMissing) {
           <igx-hint>This field is required</igx-hint>
         }
       </igx-input-group>
       <igx-input-group type="border" class="email-input">
-        <input type="password" [(ngModel)]="value1" required="true" igxInput #igxInput1 />
+        <input type="password" [(ngModel)]="password" required="true" igxInput #igxInput1 />
         <label igxLabel>Password</label>
         @if (igxInput1.validity.valueMissing) {
           <igx-hint>This field is required</igx-hint>
         }
       </igx-input-group>
-      <button igxButton="contained" type="button" igxRipple class="sign-in-button">
-        Sign in
+      
+      @if (errorMessage) {
+        <div class="error-message ig-typography__body-2" style="color: red; margin-bottom: 1rem;">
+          {{ errorMessage }}
+        </div>
+      }
+      
+      <button 
+        igxButton="contained" 
+        type="button" 
+        igxRipple 
+        class="sign-in-button"
+        (click)="onLogin()"
+        [disabled]="isLoading">
+        @if (isLoading) {
+          Signing in...
+        } @else {
+          Sign in
+        }
       </button>
     </div>
     <div class="row-layout create-account-row-layout">
       <p class="ig-typography__body-2 content">
         Don't have an account?
       </p>
-      <a target="_blank" class="ig-typography__body-2 create-account-link">
+      <a routerLink="/register-view" class="ig-typography__body-2 create-account-link">
         Create new account
       </a>
     </div>

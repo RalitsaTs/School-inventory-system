@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { IGX_INPUT_GROUP_DIRECTIVES, IGX_GRID_DIRECTIVES } from '@infragistics/igniteui-angular';
+import { IGX_INPUT_GROUP_DIRECTIVES, IGX_GRID_DIRECTIVES } from 'igniteui-angular';
 import { MyProfileViewAndHistoryComponent } from './my-profile-view-and-history.component';
 
 describe('MyProfileViewAndHistoryComponent', () => {

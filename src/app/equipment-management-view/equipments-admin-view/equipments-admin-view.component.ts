@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IGX_GRID_DIRECTIVES, IgxButtonDirective, IgxRippleDirective } from '@infragistics/igniteui-angular';
+import { IGX_GRID_DIRECTIVES, IgxButtonDirective, IgxRippleDirective } from 'igniteui-angular';
 import { Subject, takeUntil } from 'rxjs';
 import { TeacherInventoryType } from '../../models/teacher-inventory-list/teacher-inventory-type';
 import { TeacherInventoryListService } from '../../services/teacher-inventory-list.service';

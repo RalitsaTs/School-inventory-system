@@ -1,13 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IGX_CARD_DIRECTIVES, IGX_GRID_DIRECTIVES, IgxAvatarComponent, IgxIconComponent } from 'igniteui-angular';
-import { IgxCategoryChartModule } from 'igniteui-angular-charts';
 import { Subject, takeUntil } from 'rxjs';
 import { BorrowedItemsType } from '../../models/student-borrowed-items-list/borrowed-items-type';
 import { StudentBorrowedItemsListService } from '../../services/student-borrowed-items-list.service';
 
 @Component({
   selector: 'app-student-dashboard',
-  imports: [IGX_CARD_DIRECTIVES, IGX_GRID_DIRECTIVES, IgxCategoryChartModule, IgxAvatarComponent, IgxIconComponent],
+  imports: [IGX_CARD_DIRECTIVES, IGX_GRID_DIRECTIVES, IgxAvatarComponent, IgxIconComponent],
   templateUrl: './student-dashboard.component.html',
   styleUrls: ['./student-dashboard.component.scss']
 })

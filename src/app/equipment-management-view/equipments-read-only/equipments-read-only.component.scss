@@ -142,3 +142,15 @@
   --ig-size: var(--ig-size-medium);
   height: max-content;
 }
+
+.search-section {
+  margin-bottom: 16px;
+  max-width: 400px;
+}
+
+.status-badge, .condition-badge {
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.05);
+}

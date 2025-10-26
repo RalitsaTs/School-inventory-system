@@ -1,51 +1,193 @@
 <div class="column-layout admin-view-layout">
   <div class="column-layout admin-header">
     <h4 class="admin-title">
-      Administrator Settings
+      Administrator Dashboard
     </h4>
     <p class="admin-description">
-      Manage user roles by assigning Admin or User privileges.
+      Manage users, equipment requests, and system reports.
     </p>
   </div>
+
   <igx-tabs class="tabs">
+    <!-- User Management Tab -->
     <igx-tab-item [selected]="true" class="tab-item">
       <igx-tab-header>
-        <igx-icon igxTabHeaderIcon>
-          info
-        </igx-icon>
-        <span igxTabHeaderLabel>Manual set</span>
+        <igx-icon igxTabHeaderIcon>people</igx-icon>
+        <span igxTabHeaderLabel>User Management</span>
       </igx-tab-header>
-      <igx-tab-content class="row-layout tab-item-content">
-        <div class="column-layout role-assignment-form">
-          <igx-input-group type="border" class="email-input">
-            <input type="email" [(ngModel)]="value" placeholder="Enter user's email" required="true" igxInput #igxInput />
-            <label igxLabel>Email Address</label>
-            @if (igxInput.validity.valueMissing) {
-              <igx-hint>This field is required</igx-hint>
-            }
-          </igx-input-group>
-          <igx-radio-group [(ngModel)]="value1" class="role-selection">
-            <igx-radio [value]="Admin">
-              Admin
-            </igx-radio>
-            <igx-radio [value]="User">
-              User
-            </igx-radio>
-          </igx-radio-group>
-          <button igxButton="contained" type="button" igxRipple class="assign-role-button">
-            Assign Role
-          </button>
+      <igx-tab-content class="tab-item-content">
+        <div class="users-management-section">
+          <h3 class="section-title">User Management</h3>
+          <h5>Manage User Roles</h5>
+          <p>Assign and modify user roles in the system.</p>
+          
+          <igx-grid 
+            [data]="users" 
+            [allowFiltering]="true"
+            height="400px"
+            width="100%">
+            
+            <igx-column field="email" header="Email" [sortable]="true" [filterable]="true" width="250px"></igx-column>
+            <igx-column field="name" header="Name" [sortable]="true" [filterable]="true" width="200px"></igx-column>
+            
+            <igx-column field="roles" header="Current Role" [sortable]="true" [filterable]="true" width="150px">
+              <ng-template igxCell let-cell="cell">
+                {{ cell.value?.join(', ') || 'No Role' }}
+              </ng-template>
+            </igx-column>
+            
+            <igx-column field="emailConfirmed" header="Email Verified" [sortable]="true" [filterable]="true" width="120px">
+              <ng-template igxCell let-cell="cell">
+                <igx-icon [style.color]="cell.value ? 'green' : 'red'">
+                  {{ cell.value ? 'check_circle' : 'cancel' }}
+                </igx-icon>
+              </ng-template>
+            </igx-column>
+            
+            <igx-column header="Change Role" [sortable]="false" [filterable]="false" width="200px">
+              <ng-template igxCell let-cell="cell">
+                <select 
+                  class="role-select" 
+                  [value]="cell.row.data.roles?.[0] || 'Student'"
+                  (change)="onRoleChange($event, cell.row.data)">
+                  <option value="Admin">Admin</option>
+                  <option value="Teacher">Teacher</option>
+                  <option value="Student">Student</option>
+                </select>
+              </ng-template>
+            </igx-column>
+          </igx-grid>
         </div>
       </igx-tab-content>
     </igx-tab-item>
+
+    <!-- Equipment Requests Tab -->
     <igx-tab-item class="tab-item">
       <igx-tab-header>
-        <igx-icon igxTabHeaderIcon>
-          info
-        </igx-icon>
-        <span igxTabHeaderLabel>Pick From Users List</span>
+        <igx-icon igxTabHeaderIcon>assignment</igx-icon>
+        <span igxTabHeaderLabel>Equipment Requests</span>
       </igx-tab-header>
-      <igx-tab-content class="row-layout tab-item-content"></igx-tab-content>
+      <igx-tab-content class="tab-item-content">
+        <div class="requests-management-section">
+          <h3 class="section-title">Equipment Requests Management</h3>
+          <h5>All Equipment Requests</h5>
+          <p>Review and manage all equipment requests in the system.</p>
+          
+          <igx-grid 
+            [data]="allRequests" 
+            [allowFiltering]="true"
+            height="500px"
+            width="100%">
+            
+            <igx-column field="id" header="ID" [sortable]="true" [filterable]="true" width="80px"></igx-column>
+            
+            <igx-column field="equipment.name" header="Equipment" [sortable]="true" [filterable]="true" width="200px">
+              <ng-template igxCell let-cell="cell">
+                {{ cell.row.data.equipment?.name || 'N/A' }}
+              </ng-template>
+            </igx-column>
+            
+            <igx-column field="requestedAt" header="Requested" [sortable]="true" [filterable]="true" width="120px">
+              <ng-template igxCell let-cell="cell">
+                {{ formatDate(cell.value) }}
+              </ng-template>
+            </igx-column>
+            
+            <igx-column field="start" header="Start" [sortable]="true" [filterable]="true" width="120px">
+              <ng-template igxCell let-cell="cell">
+                {{ formatDate(cell.value) }}
+              </ng-template>
+            </igx-column>
+            
+            <igx-column field="end" header="End" [sortable]="true" [filterable]="true" width="120px">
+              <ng-template igxCell let-cell="cell">
+                {{ formatDate(cell.value) }}
+              </ng-template>
+            </igx-column>
+            
+            <igx-column field="status" header="Status" [sortable]="true" [filterable]="true" width="120px">
+              <ng-template igxCell let-cell="cell">
+                <span [class]="getStatusClass(cell.value)" class="status-badge">
+                  {{ cell.value }}
+                </span>
+              </ng-template>
+            </igx-column>
+            
+            <igx-column header="Actions" [sortable]="false" [filterable]="false" width="150px">
+              <ng-template igxCell let-cell="cell">
+                @if (cell.row.data.status === 'Pending') {
+                  <button 
+                    igxButton="outlined" 
+                    igxRipple 
+                    (click)="approveRequest(cell.row.data)"
+                    class="approve-btn">
+                    <igx-icon>check</igx-icon>
+                    Approve
+                  </button>
+                  <button 
+                    igxButton="outlined" 
+                    igxRipple 
+                    (click)="rejectRequest(cell.row.data)"
+                    class="reject-btn">
+                    <igx-icon>close</igx-icon>
+                    Reject
+                  </button>
+                }
+              </ng-template>
+            </igx-column>
+          </igx-grid>
+        </div>
+      </igx-tab-content>
+    </igx-tab-item>
+
+    <!-- System Reports Tab -->
+    <igx-tab-item class="tab-item">
+      <igx-tab-header>
+        <igx-icon igxTabHeaderIcon>analytics</igx-icon>
+        <span igxTabHeaderLabel>System Reports</span>
+      </igx-tab-header>
+      <igx-tab-content class="tab-item-content">
+        <div class="reports-section">
+          <h3 class="section-title">Reports & Analytics</h3>
+          <h5>System Statistics</h5>
+          
+          @if (usageStats) {
+            <div class="stats-cards">
+              <div class="stat-card">
+                <h6>Total Equipment</h6>
+                <span class="stat-value">{{ usageStats.totalEquipment }}</span>
+              </div>
+              <div class="stat-card">
+                <h6>Available</h6>
+                <span class="stat-value available">{{ usageStats.availableCount }}</span>
+              </div>
+              <div class="stat-card">
+                <h6>Checked Out</h6>
+                <span class="stat-value checked-out">{{ usageStats.checkedOutCount }}</span>
+              </div>
+              <div class="stat-card">
+                <h6>Under Repair</h6>
+                <span class="stat-value under-repair">{{ usageStats.underRepairCount }}</span>
+              </div>
+            </div>
+          }
+          
+          <div class="export-section">
+            <h6>Data Export</h6>
+            <p>Export all system data for backup or analysis.</p>
+            <button 
+              igxButton="contained" 
+              igxRipple 
+              (click)="exportData()"
+              class="export-btn">
+              <igx-icon>download</igx-icon>
+              Export All Data (CSV)
+            </button>
+          </div>
+        </div>
+      </igx-tab-content>
     </igx-tab-item>
   </igx-tabs>
+
+  <igx-snackbar #snackbar></igx-snackbar>
 </div>

@@ -112,25 +112,31 @@
               </ng-template>
             </igx-column>
             
-            <igx-column header="Actions" [sortable]="false" [filterable]="false" width="150px">
+            <igx-column header="Actions" [sortable]="false" [filterable]="false" width="180px">
               <ng-template igxCell let-cell="cell">
                 @if (cell.row.data.status === 'Pending') {
-                  <button 
-                    igxButton="outlined" 
-                    igxRipple 
-                    (click)="approveRequest(cell.row.data)"
-                    class="approve-btn">
-                    <igx-icon>check</igx-icon>
-                    Approve
-                  </button>
-                  <button 
-                    igxButton="outlined" 
-                    igxRipple 
-                    (click)="rejectRequest(cell.row.data)"
-                    class="reject-btn">
-                    <igx-icon>close</igx-icon>
-                    Reject
-                  </button>
+                  <div class="action-buttons">
+                    <button 
+                      igxButton="contained" 
+                      igxRipple 
+                      (click)="approveRequest(cell.row.data)"
+                      class="approve-btn"
+                      title="Approve Request">
+                      <igx-icon>check</igx-icon>
+                      <span>Approve</span>
+                    </button>
+                    <button 
+                      igxButton="contained" 
+                      igxRipple 
+                      (click)="rejectRequest(cell.row.data)"
+                      class="reject-btn"
+                      title="Reject Request">
+                      <igx-icon>close</igx-icon>
+                      <span>Reject</span>
+                    </button>
+                  </div>
+                } @else {
+                  <span class="action-status">{{ cell.row.data.status }}</span>
                 }
               </ng-template>
             </igx-column>

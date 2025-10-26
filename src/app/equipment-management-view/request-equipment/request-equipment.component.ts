@@ -78,10 +78,14 @@ export class RequestEquipmentComponent implements OnInit {
 
   openRequestDialog(equipment: Equipment) {
     this.selectedEquipment = equipment;
+    this.resetForm();
+    this.requestDialog.open();
+  }
+
+  private resetForm() {
     this.requestStartDate = '';
     this.requestEndDate = '';
     this.requestNotes = '';
-    this.requestDialog.open();
   }
 
   isRequestValid(): boolean {
@@ -89,35 +93,66 @@ export class RequestEquipmentComponent implements OnInit {
       return false;
     }
     
+    if (!this.selectedEquipment.equipmentId) {
+      return false;
+    }
+    
     const start = new Date(this.requestStartDate);
     const end = new Date(this.requestEndDate);
     const now = new Date();
+    
+    // Check if dates are valid
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+      return false;
+    }
     
     return start >= now && end > start;
   }
 
   submitRequest() {
     if (!this.selectedEquipment || !this.isRequestValid()) {
+      this.snackbar?.open('Please check all required fields and ensure dates are valid.');
+      return;
+    }
+
+    if (!this.selectedEquipment.equipmentId) {
+      this.snackbar?.open('Equipment ID is missing. Please try again.');
       return;
     }
 
     const request: CreateEquipmentRequest = {
-      equipmentId: this.selectedEquipment.equipmentId!,
+      equipmentId: this.selectedEquipment.equipmentId,
       start: new Date(this.requestStartDate),
       end: new Date(this.requestEndDate),
       notes: this.requestNotes.trim() || undefined
     };
 
+    console.log('Submitting request:', request);
+
     this.equipmentRequestService.createRequest(request).subscribe({
       next: (response) => {
-        this.snackbar.open('Equipment request submitted successfully!');
+        console.log('Request submitted successfully:', response);
+        this.snackbar?.open('Equipment request submitted successfully!');
         this.requestDialog.close();
         this.loadAvailableEquipment();
         this.selectedEquipment = null;
+        this.resetForm();
       },
       error: (error) => {
-        this.snackbar.open('Error creating request. Please try again.');
         console.error('Error creating request:', error);
+        let errorMessage = 'Error creating request. Please try again.';
+        
+        if (error.status === 400) {
+          errorMessage = error.error?.message || 'Invalid request data. Please check your input.';
+        } else if (error.status === 401) {
+          errorMessage = 'You must be logged in to make a request.';
+        } else if (error.status === 404) {
+          errorMessage = 'Equipment not found.';
+        } else if (error.status === 409) {
+          errorMessage = 'Equipment is already requested for this time period.';
+        }
+        
+        this.snackbar?.open(errorMessage);
       }
     });
   }

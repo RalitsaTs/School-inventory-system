@@ -12,11 +12,11 @@
     </h6>
   </igx-navbar-title>
   
-  @if (currentUser) {
+  @if (isAuthLoaded && currentUser) {
     <span class="user-welcome">Welcome, {{ currentUser.email }}</span>
   }
   
-  @if (authService.isAdmin()) {
+  @if (isAuthLoaded && authService.isAdmin()) {
     <button igxIconButton="flat" igxRipple [routerLink]="['/admin-view']" title="Admin Panel">
       <igx-icon>
         admin_panel_settings
@@ -61,7 +61,7 @@
         <span>My Requests</span>
       </div>
       
-      @if (authService.isAdmin() || authService.isUser()) {
+      @if (isAuthLoaded && (authService.isAdmin() || authService.isUser())) {
         <div igxDrawerItem igxRipple [routerLink]="['equipment-requests-and-condition-update-view']" routerLinkActive="active-nav-item">
           <igx-icon class="icon">
             pending_actions
@@ -70,7 +70,7 @@
         </div>
       }
       
-      @if (authService.isAdmin()) {
+      @if (isAuthLoaded && authService.isAdmin()) {
         <div igxDrawerItem igxRipple [routerLink]="['equipments-admin-view']" routerLinkActive="active-nav-item">
           <igx-icon class="icon">
             settings

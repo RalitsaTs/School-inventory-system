@@ -1,32 +1,82 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IGX_GRID_DIRECTIVES, IGX_INPUT_GROUP_DIRECTIVES, IGX_SELECT_DIRECTIVES, IgxButtonDirective, IgxRippleDirective } from 'igniteui-angular';
+import { CommonModule } from '@angular/common';
+import { 
+  IGX_GRID_DIRECTIVES
+} from 'igniteui-angular';
 import { Subject, takeUntil } from 'rxjs';
-import { EmployeesType } from '../../models/northwind/employees-type';
-import { NorthwindService } from '../../services/northwind.service';
+import { ReportsService, HistoryItem } from '../../services/reports.service';
 
 @Component({
   selector: 'app-borrowing-history',
-  imports: [IGX_INPUT_GROUP_DIRECTIVES, IGX_SELECT_DIRECTIVES, IGX_GRID_DIRECTIVES, IgxButtonDirective, IgxRippleDirective],
+  standalone: true,
+  imports: [
+    CommonModule,
+    IGX_GRID_DIRECTIVES
+  ],
   templateUrl: './borrowing-history.component.html',
   styleUrls: ['./borrowing-history.component.scss']
 })
 export class BorrowingHistoryComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
-  public northwindEmployees: EmployeesType[] = [];
+  public activityHistory: HistoryItem[] = [];
+  public isLoading = false;
 
   constructor(
-    public northwindService: NorthwindService,
+    private reportsService: ReportsService
   ) {}
 
-
   ngOnInit() {
-    this.northwindService.getEmployees().pipe(takeUntil(this.destroy$)).subscribe(
-      data => this.northwindEmployees = data
-    );
+    this.loadActivityHistory();
   }
 
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  private loadActivityHistory() {
+    this.isLoading = true;
+    this.reportsService.getActivityHistory()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (data) => {
+          this.activityHistory = data.sort((a, b) => 
+            new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+          );
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error('Error loading activity history:', error);
+          this.isLoading = false;
+        }
+      });
+  }
+
+  public formatDate(date: Date | string): string {
+    if (!date) return '-';
+    const d = new Date(date);
+    return d.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+
+  public getActionClass(action: string): string {
+    switch (action.toLowerCase()) {
+      case 'request:create':
+      case 'request:auto-approve':
+        return 'action-request';
+      case 'request:approve':
+        return 'action-approve';
+      case 'request:reject':
+        return 'action-reject';
+      case 'return':
+        return 'action-return';
+      default:
+        return 'action-default';
+    }
   }
 }

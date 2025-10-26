@@ -41,7 +41,7 @@ import { RequestStatus, Condition, EquipmentStatus } from '../../models/api/enum
         [data]="myRequests" 
         [allowFiltering]="true"
         [filterMode]="'excelStyleFilter'"
-        height="600px"
+        height="500px"
         width="100%">
         
         <igx-column field="id" header="Request ID" [sortable]="true" [filterable]="true" width="100px"></igx-column>

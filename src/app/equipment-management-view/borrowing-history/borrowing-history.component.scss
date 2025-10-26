@@ -1,59 +1,115 @@
 :host {
   height: 100%;
   display: flex;
-  justify-content: flex-start;
-  align-items: stretch;
-  align-content: flex-start;
-}
-.column-layout {
-  display: flex;
   flex-direction: column;
 }
-.request-equipment-layout {
-  justify-content: flex-start;
-  align-items: center;
-  align-content: flex-start;
-  gap: 24px;
-  position: relative;
-  padding: 24px;
-  min-width: 50px;
-  min-height: 50px;
-  flex-grow: 1;
-  flex-basis: 0;
-}
-.row-layout {
+
+.borrowing-history-container {
   display: flex;
-}
-.request-buttons-row {
-  justify-content: center;
-  align-items: center;
-  align-content: flex-start;
-  gap: 8px 16px;
-  position: relative;
-  min-width: 50px;
-  min-height: 50px;
-  flex-shrink: 0;
-}
-.request-equipment-title {
-  text-align: center;
-  height: max-content;
-  min-width: min-content;
-}
-.equipment-dropdown {
-  --ig-size: var(--ig-size-medium);
-  height: max-content;
-  min-width: min-content;
-}
-.submit-request-button {
-  --ig-size: var(--ig-size-medium);
-  height: max-content;
-  flex-shrink: 0;
-}
-.grid {
-  --ig-size: var(--ig-size-medium);
-  min-width: 600px;
-  min-height: 300px;
-  max-width: 1011px;
+  flex-direction: column;
+  padding: 24px;
+  height: 100%;
   flex-grow: 1;
-  flex-basis: 0;
+}
+
+.header-section {
+  margin-bottom: 24px;
+  
+  h2 {
+    margin: 0 0 8px 0;
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 0.875rem;
+  }
+  
+  .loading-indicator {
+    margin-top: 16px;
+    color: #007bff;
+    font-style: italic;
+  }
+}
+
+.activity-grid {
+  --ig-size: var(--ig-size-medium);
+  flex-grow: 1;
+  min-height: 400px;
+}
+
+.action-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  
+  &.action-request {
+    background-color: #e3f2fd;
+    color: #1976d2;
+  }
+  
+  &.action-approve {
+    background-color: #e8f5e8;
+    color: #2e7d32;
+  }
+  
+  &.action-reject {
+    background-color: #ffebee;
+    color: #d32f2f;
+  }
+  
+  &.action-return {
+    background-color: #fff3e0;
+    color: #f57c00;
+  }
+  
+  &.action-default {
+    background-color: #f5f5f5;
+    color: #666;
+  }
+}
+
+// Dark theme support
+@media (prefers-color-scheme: dark) {
+  .header-section {
+    h2 {
+      color: #e0e0e0;
+    }
+    
+    p {
+      color: #bbb;
+    }
+  }
+  
+  .action-badge {
+    &.action-request {
+      background-color: #1e3a8a;
+      color: #93c5fd;
+    }
+    
+    &.action-approve {
+      background-color: #14532d;
+      color: #86efac;
+    }
+    
+    &.action-reject {
+      background-color: #7f1d1d;
+      color: #fca5a5;
+    }
+    
+    &.action-return {
+      background-color: #92400e;
+      color: #fed7aa;
+    }
+    
+    &.action-default {
+      background-color: #374151;
+      color: #d1d5db;
+    }
+  }
 }

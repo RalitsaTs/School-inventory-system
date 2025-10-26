@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 
 import { EquipmentManagementViewComponent } from './equipment-management-view.component';
 import { EquipmentListComponent } from './equipment-list/equipment-list.component';
-import { EquipmentsAdminViewComponent } from './equipments-admin-view/equipments-admin-view.component';
 import { RequestEquipmentComponent } from './request-equipment/request-equipment.component';
 import { MyRequestsComponent } from './my-requests/my-requests.component';
 import { BorrowingHistoryComponent } from './borrowing-history/borrowing-history.component';
@@ -42,12 +41,6 @@ export const routes: Routes = [
         component: EquipmentRequestsViewComponent, 
         canActivate: [userOrAdminGuard],
         data: { text: 'Equipment-Requests-View' } 
-      },
-      { 
-        path: 'equipments-admin-view', 
-        component: EquipmentsAdminViewComponent, 
-        canActivate: [adminGuard],
-        data: { text: 'Equipments-Admin-View' } 
       },
       { 
         path: 'admin-panel', 

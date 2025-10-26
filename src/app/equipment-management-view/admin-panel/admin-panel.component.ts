@@ -9,14 +9,19 @@ import {
   IgxRippleDirective,
   IgxGridModule,
   IgxSnackbarComponent,
-  IgxDialogModule
+  IgxDialogModule,
+  IGX_SELECT_DIRECTIVES,
+  IgxCheckboxModule
 } from 'igniteui-angular';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { EquipmentRequestService } from '../../services/equipment-request.service';
 import { ReportsService } from '../../services/reports.service';
+import { EquipmentService } from '../../services/equipment.service';
 import { UserWithRoles } from '../../models/api/user.model';
 import { EquipmentRequest } from '../../models/api/equipment-request.model';
+import { Equipment } from '../../models/api/equipment.model';
+import { Condition, EquipmentStatus } from '../../models/api/enums';
 
 @Component({
   selector: 'app-admin-panel',
@@ -31,7 +36,9 @@ import { EquipmentRequest } from '../../models/api/equipment-request.model';
     IgxRippleDirective,
     IgxGridModule,
     IgxSnackbarComponent,
-    IgxDialogModule
+    IgxDialogModule,
+    IGX_SELECT_DIRECTIVES,
+    IgxCheckboxModule
   ],
   templateUrl: './admin-panel.component.html',
   styleUrls: ['./admin-panel.component.scss']
@@ -46,17 +53,20 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
   public usageStats: any = null;
   public selectedUser: UserWithRoles | null = null;
   public newUserRole = 'User';
+  public equipment: Equipment[] = [];
 
   constructor(
     private authService: AuthService,
     private equipmentRequestService: EquipmentRequestService,
-    private reportsService: ReportsService
+    private reportsService: ReportsService,
+    private equipmentService: EquipmentService
   ) {}
 
   ngOnInit() {
     this.loadUsers();
     this.loadAllRequests();
     this.loadUsageStats();
+    this.loadEquipment();
   }
 
   ngOnDestroy() {
@@ -104,6 +114,20 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
         },
         error: (error) => {
           console.error('Error loading usage stats:', error);
+        }
+      });
+  }
+
+  private loadEquipment() {
+    this.equipmentService.getAllEquipment()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (equipment) => {
+          this.equipment = equipment;
+        },
+        error: (error) => {
+          console.error('Error loading equipment:', error);
+          this.snackbar?.open('Error loading equipment');
         }
       });
   }
@@ -215,5 +239,137 @@ export class AdminPanelComponent implements OnInit, OnDestroy {
           this.snackbar?.open('Error exporting data');
         }
       });
+  }
+
+  // Equipment Management Methods
+  public addNewEquipment() {
+    const newEquipment: Equipment = {
+      name: '',
+      type: '',
+      serialNumber: '',
+      condition: Condition.Good,
+      status: EquipmentStatus.Available,
+      location: '',
+      isSensitive: false
+    };
+
+    // Add to the beginning of the array for immediate editing
+    this.equipment.unshift(newEquipment);
+  }
+
+  public onRowEditEnter(event: any) {
+    // Row edit enter event
+    console.log('Row edit enter:', event);
+  }
+
+  public onRowEdit(event: any) {
+    // Row edit event
+    console.log('Row edit:', event);
+  }
+
+  public onRowEditDone(event: any) {
+    const editedEquipment = event.newValue;
+    const isNewRecord = !editedEquipment.equipmentId;
+
+    if (isNewRecord) {
+      // Create new equipment
+      this.equipmentService.createEquipment(editedEquipment)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (createdEquipment) => {
+            // Replace the temporary record with the created one
+            const index = this.equipment.findIndex(eq => !eq.equipmentId && eq.name === editedEquipment.name);
+            if (index !== -1) {
+              this.equipment[index] = createdEquipment;
+            }
+            this.snackbar?.open('Equipment created successfully');
+          },
+          error: (error) => {
+            console.error('Error creating equipment:', error);
+            this.snackbar?.open('Error creating equipment');
+            // Remove the failed record
+            this.equipment = this.equipment.filter(eq => eq.equipmentId || eq !== editedEquipment);
+          }
+        });
+    } else {
+      // Update existing equipment
+      this.equipmentService.updateEquipment(editedEquipment.equipmentId!, editedEquipment)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (updatedEquipment) => {
+            const index = this.equipment.findIndex(eq => eq.equipmentId === editedEquipment.equipmentId);
+            if (index !== -1) {
+              this.equipment[index] = updatedEquipment;
+            }
+            this.snackbar?.open('Equipment updated successfully');
+          },
+          error: (error) => {
+            console.error('Error updating equipment:', error);
+            this.snackbar?.open('Error updating equipment');
+            // Revert changes
+            this.loadEquipment();
+          }
+        });
+    }
+  }
+
+  public onRowEditExit(event: any) {
+    // If it's a new record that was cancelled, remove it
+    const cancelledRecord = event.rowData;
+    if (!cancelledRecord.equipmentId) {
+      this.equipment = this.equipment.filter(eq => eq !== cancelledRecord);
+    }
+  }
+
+  public deleteEquipment(equipment: Equipment) {
+    if (!equipment.equipmentId) {
+      // Remove from array if it's a new unsaved record
+      this.equipment = this.equipment.filter(eq => eq !== equipment);
+      return;
+    }
+
+    if (confirm(`Are you sure you want to delete ${equipment.name}?`)) {
+      this.equipmentService.deleteEquipment(equipment.equipmentId)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: () => {
+            this.equipment = this.equipment.filter(eq => eq.equipmentId !== equipment.equipmentId);
+            this.snackbar?.open('Equipment deleted successfully');
+          },
+          error: (error) => {
+            console.error('Error deleting equipment:', error);
+            this.snackbar?.open('Error deleting equipment');
+          }
+        });
+    }
+  }
+
+  public getConditionClass(condition: string): string {
+    switch (condition) {
+      case 'Excellent': return 'condition-excellent';
+      case 'Good': return 'condition-good';
+      case 'Fair': return 'condition-fair';
+      case 'Damaged': return 'condition-damaged';
+      default: return '';
+    }
+  }
+
+  public getEquipmentStatusClass(status: string): string {
+    switch (status) {
+      case 'Available': return 'equipment-available';
+      case 'CheckedOut': return 'equipment-checked-out';
+      case 'UnderRepair': return 'equipment-under-repair';
+      case 'Retired': return 'equipment-retired';
+      case 'Unavailable': return 'equipment-unavailable';
+      default: return '';
+    }
+  }
+
+  public getStatusDisplayText(status: string): string {
+    switch (status) {
+      case 'CheckedOut': return 'Checked Out';
+      case 'UnderRepair': return 'Under Repair';
+      default: return status;
+    }
   }
 }

@@ -17,7 +17,7 @@
   }
   
   @if (isAuthLoaded && authService.isAdmin()) {
-    <button igxIconButton="flat" igxRipple [routerLink]="['/admin-view']" title="Admin Panel">
+    <button igxIconButton="flat" igxRipple [routerLink]="['admin-panel']" title="Admin Panel">
       <igx-icon>
         admin_panel_settings
       </igx-icon>
@@ -40,6 +40,30 @@
 <div class="row-layout horizontal-group">
   <igx-nav-drawer [isOpen]="true" [pin]="true" width="320px" #dashboardNavDrawer class="dashboard-nav-drawer">
     <ng-template igxDrawer>
+      
+      @if (isAuthLoaded && authService.isAdmin()) {
+        <div igxDrawerItem igxRipple [routerLink]="['admin-panel']" routerLinkActive="active-nav-item">
+          <igx-icon class="icon">
+            admin_panel_settings
+          </igx-icon>
+          <span>Admin Panel</span>
+        </div>
+        
+        <div igxDrawerItem igxRipple [routerLink]="['equipment-requests-view']" routerLinkActive="active-nav-item">
+          <igx-icon class="icon">
+            pending_actions
+          </igx-icon>
+          <span>Manage Requests</span>
+        </div>
+        
+        <div igxDrawerItem igxRipple [routerLink]="['equipments-admin-view']" routerLinkActive="active-nav-item">
+          <igx-icon class="icon">
+            settings
+          </igx-icon>
+          <span>Manage Equipment</span>
+        </div>
+      }
+      
       <div igxDrawerItem igxRipple [routerLink]="['equipment-list']" routerLinkActive="active-nav-item">
         <igx-icon class="icon">
           inventory
@@ -68,21 +92,6 @@
         <span>Borrowing History</span>
       </div>
       
-      @if (isAuthLoaded && authService.isAdmin()) {
-        <div igxDrawerItem igxRipple [routerLink]="['equipment-requests-view']" routerLinkActive="active-nav-item">
-          <igx-icon class="icon">
-            pending_actions
-          </igx-icon>
-          <span>Manage Requests</span>
-        </div>
-        
-        <div igxDrawerItem igxRipple [routerLink]="['equipments-admin-view']" routerLinkActive="active-nav-item">
-          <igx-icon class="icon">
-            settings
-          </igx-icon>
-          <span>Manage Equipment</span>
-        </div>
-      }
     </ng-template>
   </igx-nav-drawer>
   

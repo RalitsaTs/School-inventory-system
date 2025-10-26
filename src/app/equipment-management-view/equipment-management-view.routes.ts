@@ -7,6 +7,7 @@ import { RequestEquipmentComponent } from './request-equipment/request-equipment
 import { MyRequestsComponent } from './my-requests/my-requests.component';
 import { BorrowingHistoryComponent } from './borrowing-history/borrowing-history.component';
 import { EquipmentRequestsViewComponent } from './equipment-requests-view/equipment-requests-view.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { authGuard, adminGuard, userOrAdminGuard } from '../guards/auth.guard';
 
 export const routes: Routes = [
@@ -47,6 +48,12 @@ export const routes: Routes = [
         component: EquipmentsAdminViewComponent, 
         canActivate: [adminGuard],
         data: { text: 'Equipments-Admin-View' } 
+      },
+      { 
+        path: 'admin-panel', 
+        component: AdminPanelComponent, 
+        canActivate: [adminGuard],
+        data: { text: 'Admin-Panel' } 
       },
     ]
   },

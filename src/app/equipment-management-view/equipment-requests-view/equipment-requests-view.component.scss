@@ -1,79 +1,137 @@
 :host {
   height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
   align-content: flex-start;
-  gap: 0;
-}
-.column-layout {
-  display: flex;
-  flex-direction: column;
-}
-.equipment-requests-content {
-  justify-content: flex-start;
-  align-items: stretch;
-  align-content: flex-start;
-  gap: 24px;
-  overflow: auto;
-  position: relative;
   padding: 24px;
-  min-width: 50px;
-  min-height: 50px;
-  flex-grow: 1;
-  flex-shrink: 0;
 }
-.equipment-requests-header {
-  justify-content: flex-start;
-  align-items: stretch;
-  align-content: flex-start;
-  gap: 8px;
-  position: relative;
-  min-width: unset;
-  max-height: unset;
-  flex-shrink: 0;
-}
-.request-card {
-  height: max-content;
-  min-width: 320px;
-}
-.request-card-content {
-  justify-content: flex-start;
-  align-items: stretch;
-  align-content: flex-start;
-  gap: 8px;
-  position: relative;
-  min-width: 50px;
-  min-height: 50px;
-}
-.row-layout {
+
+.equipment-requests-container {
+  width: 100%;
+  height: 100%;
   display: flex;
+  flex-direction: column;
 }
-.action-buttons-row {
-  justify-content: center;
+
+.header-section {
+  margin-bottom: 24px;
+}
+
+.header-section h2 {
+  margin: 0 0 8px 0;
+  color: var(--igx-primary-600);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.header-section p {
+  margin: 0;
+  color: var(--igx-gray-600);
+  font-size: 1rem;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
+}
+
+.status-approved {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.status-rejected {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.status-returned {
+  background-color: #d1ecf1;
+  color: #0c5460;
+  border: 1px solid #bee5eb;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
   align-items: center;
-  align-content: flex-start;
-  gap: 8px 16px;
-  position: relative;
-  min-width: 50px;
-  min-height: 50px;
-  flex-shrink: 0;
+  justify-content: flex-start;
 }
-.content {
-  height: max-content;
-  min-width: min-content;
+
+.approve-btn, .reject-btn {
+  min-height: 32px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-.body-content {
-  min-width: 50px;
-  min-height: 50px;
+
+.approve-btn {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  color: white;
 }
-.actions-content {
-  min-width: 50px;
-  min-height: 40px;
+
+.approve-btn:hover {
+  background: linear-gradient(135deg, #1e7e34 0%, #1a9775 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
 }
-.approve-button {
-  --ig-size: var(--ig-size-medium);
-  height: max-content;
-  flex-shrink: 0;
+
+.approve-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
+}
+
+.reject-btn {
+  background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%);
+  color: white;
+}
+
+.reject-btn:hover {
+  background: linear-gradient(135deg, #c82333 0%, #d63031 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.reject-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.2);
+}
+
+.approve-btn igx-icon,
+.reject-btn igx-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.action-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background-color: var(--igx-gray-100);
+  color: var(--igx-gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }

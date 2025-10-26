@@ -12,14 +12,15 @@ import {
   IgxDialogModule
 } from 'igniteui-angular';
 import { Subject, takeUntil } from 'rxjs';
-import { AuthService } from '../services/auth.service';
-import { EquipmentRequestService } from '../services/equipment-request.service';
-import { ReportsService } from '../services/reports.service';
-import { UserWithRoles } from '../models/api/user.model';
-import { EquipmentRequest } from '../models/api/equipment-request.model';
+import { AuthService } from '../../services/auth.service';
+import { EquipmentRequestService } from '../../services/equipment-request.service';
+import { ReportsService } from '../../services/reports.service';
+import { UserWithRoles } from '../../models/api/user.model';
+import { EquipmentRequest } from '../../models/api/equipment-request.model';
 
 @Component({
-  selector: 'app-admin-view',
+  selector: 'app-admin-panel',
+  standalone: true,
   imports: [
     CommonModule,
     FormsModule,
@@ -32,10 +33,10 @@ import { EquipmentRequest } from '../models/api/equipment-request.model';
     IgxSnackbarComponent,
     IgxDialogModule
   ],
-  templateUrl: './admin-view.component.html',
-  styleUrls: ['./admin-view.component.scss']
+  templateUrl: './admin-panel.component.html',
+  styleUrls: ['./admin-panel.component.scss']
 })
-export class AdminViewComponent implements OnInit, OnDestroy {
+export class AdminPanelComponent implements OnInit, OnDestroy {
   @ViewChild('snackbar', { static: true }) snackbar: any;
 
   private destroy$: Subject<void> = new Subject<void>();
